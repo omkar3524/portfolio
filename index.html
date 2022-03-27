@@ -7,14 +7,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Omkar Verma</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="script.js" defer></script>
     <link rel="stylesheet" href="styles.css">
 
 </head>
 
 <body class="bg-gray-800">
+   
     <!-- component -->
     <!-- Creaet Blog Portfolio By Joker Banny -->
-    <header class="max-h-full text-gray-300 p-6 grid">
+    <header class="max-h-full text-gray-300 p-6 grid relative"  id="co">
+        <canvas id="c" class="absolute"></canvas>
         <!-- Navbar Menu -->
         <nav class="container mx-auto grid justify-end">
             <ul class="hidden md:flex space-x-8 font-bold text-green-500">
@@ -35,9 +38,9 @@
             <div class="grid justify-center items-center order-1 col-span-1">
                 <img class="lg:h-80 md:h-64 h-40 rounded-full" src="images/myself.jpg" alt="" />
             </div>
-            <div class="mt-8 md:mt-0 lg:justify-end col-span-2">
+            <div class="mt-8 md:mt-0 lg:justify-end col-span-2 z-10">
                 <h1 class="text-4xl text-center md:text-left font-bold mb-6">Hi, I am Omkar, Software Engineer</h1>
-                <p class="text-xl text-center md:text-left">Full stack developer, Experienced in technology like <br>
+                <p class="text-xl text-center md:text-left lg:max-w-xl">Full stack developer, Experienced in technology like
                     Laravel, Javascript, Tailwind, Vuejs and Livewire</p>
                 <button
                     class="block mt-8 mx-auto md:mx-0 text-2xl py-3 px-6 text-green-50 font-semibold rounded bg-green-500">Contact
@@ -152,8 +155,6 @@
         </div> -->
         </div>
     </section>
-
-
 
     <footer class="text-center bg-gray-900 text-white">
         <div class="container px-6 pt-6 mx-auto">
