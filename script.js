@@ -7,8 +7,9 @@
     addListeners();
 
     function initHeader() {
+        let box = document.querySelector('#co');
         width = window.innerWidth;
-        height = window.innerHeight;
+        height = box.offsetHeight;
         target = {x: 0, y: height};
       
         largeContainer = document.getElementById('co');
