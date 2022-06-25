@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Omkar Verma</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- <script src="script.js" defer></script> -->
+    <!-- <link rel="stylesheet" href="styles.css"> -->
+    <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+    <script src="//unpkg.com/alpinejs" defer></script>
+    <style>
+        /* .pln{
+            display: none;
+        } */
+        code .com {
+            color: rgb(117, 120, 122);
+        }
+    </style>
+</head>
+
+<body class="bg-gray-800">
+    <div class="text-center p-8 bg-red-700 w-full text-white font-bold">
+        <p class=" text-2xl">Git cheatsheet </p>
+        <span class="underline">maintained by omkar</span>
+    </div>
+    <div class="flex flex-col min-h-screen max-w-7xl mx-auto">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 mt-8 flex-grow">
+            <main>
+                <div class="flex my-8">
+                    <!-- <div class="hidden md:block md:w-1/4">
+                    </div> -->
+                    <div class="w-full md:w-full">
+                        <div class="space-y-8">
+                            <!---->
+                            <div id="setup"
+                                class="shadow-lg rounded-lg overflow-hidden bg-white dark:bg-gray-800 dark:border-2 dark:border-gray-200">
+                                <div class="rounded-t-lg bg-gradient-to-r from-red-700 to-orange-600">
+                                    <div class="p-4 px-8">
+                                        <h2 class="text-lg font-bold text-white dark:text-gray-300"><a
+                                                href="#setup">SETUP</a></h2>
+                                        <p class="text-gray-100">
+                                            Configuring user information used across all local repositories
+                                        </p>
+
+                                    </div>
+                                </div>
+                                <div class="px-8 py-4 space-y-2 bg-red-50">
+                                    <div class="text-sm text-gray-700 dark:text-gray-300 ">
+
+                                        <ul class="list-none list-inside space-y-4 " x-data="{ open: false }">
+                                            <div class="border-l-4 border-red-500">
+                                                <li class="p-2 rounded text-gray-600 font-bold relative"
+                                                    x-on:mouseover="open = true" x-on:mouseout="open = false">git
+                                                    config
+                                                    --global
+                                                    user.name
+                                                    “[firstname lastname]”
+                                                </li>
+                                                <p class="text-gray-500 pl-2">
+                                                    set a name that is identifiable for credit when review version
+                                                    history
+                                                </p>
+                                            </div>
+
+                                            <div class="border-l-4 border-red-500">
+                                                <li class="p-2 rounded text-gray-600 font-bold">git config --global
+                                                    user.email
+                                                    “[valid-email]”</li>
+                                                <p class="text-gray-500 pl-2">
+                                                    set an email address that will be associated with each history
+                                                    marker
+                                                </p>
+                                            </div>
+                                            <div class="border-l-4 border-red-500">
+                                                <li class="p-2 rounded text-gray-600 font-bold">git config --global
+                                                    color.ui
+                                                    auto
+                                                </li>
+                                                <p class="text-gray-500 pl-2">
+                                                    set automatic command line coloring for Git for easy reviewing
+                                                </p>
+                                                </li>
+                                            </div>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- ------- -->
+                            <!---->
+                            <div id="setup-init"
+                                class="shadow-lg rounded-lg overflow-hidden bg-white dark:bg-gray-800 dark:border-2 dark:border-gray-200">
+                                <div class="rounded-t-lg bg-gradient-to-r from-red-700 to-orange-600">
+                                    <div class="p-4 px-8">
+                                        <h2 class="text-lg font-bold text-white dark:text-gray-300"><a
+                                                href="#setup-init">SETUP & INIT</a></h2>
+                                        <p class="text-gray-100">
+                                            Configuring user information, initializing and cloning repositories
+                                        </p>
+
+                                    </div>
+                                </div>
+                                <div class="px-8 py-4 space-y-2 bg-red-50">
+                                    <div class="text-sm text-gray-700 dark:text-gray-300 ">
+
+
+                                        <ul class="list-none list-inside space-y-4">
+                                            <div class="border-l-4 border-red-500">
+                                                <li class="p-2 rounded text-gray-600 font-bold">git init</li>
+                                                <p class="text-gray-500 pl-2">
+                                                    initialize an existing directory as a Git repository
+                                                </p>
+                                            </div>
+                                            <div class="border-l-4 border-red-500">
+                                                <li class="p-2 rounded text-gray-600 font-bold">git clone [url]</li>
+                                                </li>
+                                                <p class="text-gray-500 pl-2">
+                                                    retrieve an entire repository from a hosted location via URL
+                                                </p>
+                                            </div>
+                                        </ul>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- ------- -->
+                            <!---->
+                            <div id="stage"
+                                class="shadow-lg rounded-lg overflow-hidden bg-white dark:bg-gray-800 dark:border-2 dark:border-gray-200">
+                                <div class="rounded-t-lg bg-gradient-to-r from-red-700 to-orange-600">
+                                    <div class="p-4 px-8">
+                                        <h2 class="text-lg font-bold text-white dark:text-gray-300"><a
+                                                href="#stage">STAGE & SNAPSHOT</a></h2>
+                                        <p class="text-gray-100">
+                                            Working with snapshots and the Git staging area
+                                        </p>
+
+                                    </div>
+                                </div>
+                                <div class="px-8 py-4 space-y-2 bg-red-50">
+                                    <div class="text-sm text-gray-700 dark:text-gray-300 ">
+
+
+                                        <ul class="list-none list-inside space-y-4">
+                                            <div class="border-l-4 border-red-500">
+                                                <li class="p-2 rounded text-gray-600 font-bold">git status</li>
+                                                <p class="text-gray-500 pl-2">
+                                                    show modified files in working directory, staged for your next
+                                                    commit
+                                                </p>
+                                            </div>
+
+
+                                            <div class="border-l-4 border-red-500">
+                                                <li class="p-2 rounded text-gray-600 font-bold">git add [file]</li>
+                                                <p class="text-gray-500 pl-2">
+                                                    add a file as it looks now to your next commit (stage)
+                                                </p>
+                                            </div>
+
+                                            <div class="border-l-4 border-red-500">
+                                                <li class="p-2 rounded text-gray-600 font-bold">git reset [file]</li>
+                                                <p class="text-gray-500 pl-2">
+                                                    unstage a file while retaining the changes in working directory
+                                                </p>
+                                            </div>
+
+                                            <div class="border-l-4 border-red-500">
+                                                <li class="p-2 rounded text-gray-600 font-bold">git diff</li>
+                                                <p class="text-gray-500 pl-2">
+                                                    diff of what is changed but not staged
+                                                </p>
+                                            </div>
+
+                                            <div class="border-l-4 border-red-500">
+                                                <li class="p-2 rounded text-gray-600 font-bold">git diff --staged</li>
+                                                <p class="text-gray-500 pl-2">
+                                                    diff of what is staged but not yet commited
+                                                </p>
+                                            </div>
+
+                                            <div class="border-l-4 border-red-500">
+                                                <li class="p-2 rounded text-gray-600 font-bold">git commit -m
+                                                    “[descriptive
+                                                    message]”</li>
+                                                <p class="text-gray-500 pl-2">
+                                                    commit your staged content as a new commit snapshot
+                                                </p>
+                                            </div>
+
+                                        </ul>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- ------- -->
+                            <div id="branch"
+                                class="shadow-lg rounded-lg overflow-hidden bg-white dark:bg-gray-800 dark:border-2 dark:border-gray-200">
+                                <div class="rounded-t-lg bg-gradient-to-r from-red-700 to-orange-600">
+                                    <div class="p-4 px-8">
+                                        <h2 class="text-lg font-bold text-white dark:text-gray-300"><a
+                                                href="#branch">BRANCH & MERGE</a></h2>
+                                        <p class="text-gray-100">
+                                            Isolating work in branches, changing context, and integrating changes
+                                        </p>
+
+                                    </div>
+                                </div>
+                                <div class="px-8 py-4 space-y-2 bg-red-50">
+                                    <div class="text-sm text-gray-700 dark:text-gray-300 ">
+
+
+                                        <ul class="list-none list-inside space-y-4">
+                                            <div class="border-l-4 border-red-500">
+                                                <li class="p-2 rounded text-gray-600 font-bold">git branch</li>
+                                                <p class="text-gray-500 pl-2">
+                                                    list your branches. a * will appear next to the currently active
+                                                    branch
+                                                </p>
+                                            </div>
+                                            <div class="border-l-4 border-red-500">
+                                                <li class="p-2 rounded text-gray-600 font-bold">git branch [branch-name
+                                                </li>
+                                                <p class="text-gray-500 pl-2">
+                                                    create a new branch at the current commit
+                                                </p>
+                                            </div>
+                                            <div class="border-l-4 border-red-500">
+                                                <li class="p-2 rounded text-gray-600 font-bold">git checkout</li>
+                                                <p class="text-gray-500 pl-2">
+                                                    switch to another branch and check it out into your working
+                                                    directory
+                                                </p>
+                                            </div>
+                                            <div class="border-l-4 border-red-500">
+                                                <li class="p-2 rounded text-gray-600 font-bold">git merge [branch]</li>
+                                                <p class="text-gray-500 pl-2">
+                                                    merge the specified branch’s history into the current one
+                                                </p>
+                                            </div>
+                                        </ul>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- ------- -->
+                            <div id="inspect"
+                                class="shadow-lg rounded-lg overflow-hidden bg-white dark:bg-gray-800 dark:border-2 dark:border-gray-200">
+                                <div class="rounded-t-lg bg-gradient-to-r from-red-700 to-orange-600">
+                                    <div class="p-4 px-8">
+                                        <h2 class="text-lg font-bold text-white dark:text-gray-300"><a
+                                                href="#inspect">INSPECT & COMPARE</a></h2>
+                                        <p class="text-gray-100">
+                                            Examining logs, diffs and object information
+                                        </p>
+
+                                    </div>
+                                </div>
+                                <div class="px-8 py-4 space-y-2 bg-red-50">
+                                    <div class="text-sm text-gray-700 dark:text-gray-300 ">
+
+
+                                        <ul class="list-none list-inside space-y-4">
+                                            <div class="border-l-4 border-red-500">
+                                                <li class="p-2 rounded text-gray-600 font-bold">git log</li>
+                                                <p class="text-gray-500 pl-2">
+                                                    show the commit history for the currently active branch
+                                                </p>
+                                            </div>
+                                            <div class="border-l-4 border-red-500">
+                                                <li class="p-2 rounded text-gray-600 font-bold">git log branchB..branchA
+                                                </li>
+                                                <p class="text-gray-500 pl-2">
+                                                    show the commits on branchA that are not on branchB
+                                                </p>
+                                            </div>
+                                            <div class="border-l-4 border-red-500">
+                                                <li class="p-2 rounded text-gray-600 font-bold">git log --follow [file]
+                                                </li>
+                                                <p class="text-gray-500 pl-2">
+                                                    show the commits that changed file, even across renames
+                                                </p>
+                                            </div>
+                                            <div class="border-l-4 border-red-500">
+                                                <li class="p-2 rounded text-gray-600 font-bold">git diff
+                                                    branchB...branchA</li>
+                                                <p class="text-gray-500 pl-2">
+                                                    show the diff of what is in branchA that is not in branchB
+                                                </p>
+                                            </div>
+                                            <div class="border-l-4 border-red-500">
+                                                <li class="p-2 rounded text-gray-600 font-bold">git show [SHA]</li>
+                                                <p class="text-gray-500 pl-2">
+                                                    show any object in Git in human-readable format
+                                                </p>
+                                            </div>
+
+                                        </ul>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- ------- -->
+                            <div id="share"
+                                class="shadow-lg rounded-lg overflow-hidden bg-white dark:bg-gray-800 dark:border-2 dark:border-gray-200">
+                                <div class="rounded-t-lg bg-gradient-to-r from-red-700 to-orange-600">
+                                    <div class="p-4 px-8">
+                                        <h2 class="text-lg font-bold text-white dark:text-gray-300"><a
+                                                href="#share">SHARE & UPDATE</a></h2>
+                                        <p class="text-gray-100">
+                                            Retrieving updates from another repository and updating local repos
+                                        </p>
+
+                                    </div>
+                                </div>
+                                <div class="px-8 py-4 space-y-2 bg-red-50">
+                                    <div class="text-sm text-gray-700 dark:text-gray-300 ">
+
+
+                                        <ul class="list-none list-inside space-y-4">
+                                            <div class="border-l-4 border-red-500">
+                                                <li class="p-2 rounded text-gray-600 font-bold">git remote add [alias]
+                                                    [url]</li>
+                                                <p class="text-gray-500 pl-2">
+                                                    add a git URL as an alias
+                                                </p>
+                                            </div>
+                                            <div class="border-l-4 border-red-500">
+                                                <li class="p-2 rounded text-gray-600 font-bold">git fetch [alias]
+                                                </li>
+                                                <p class="text-gray-500 pl-2">
+                                                    fetch down all the branches from that Git remote
+                                                </p>
+                                            </div>
+                                            <div class="border-l-4 border-red-500">
+                                                <li class="p-2 rounded text-gray-600 font-bold">git merge
+                                                    [alias]/[branch]
+                                                </li>
+                                                <p class="text-gray-500 pl-2">
+                                                    merge a remote branch into your current branch to bring it up to
+                                                    date
+                                                </p>
+                                            </div>
+                                            <div class="border-l-4 border-red-500">
+                                                <li class="p-2 rounded text-gray-600 font-bold">git push [alias]
+                                                    [branch]</li>
+                                                <p class="text-gray-500 pl-2">
+                                                    Transmit local branch commits to the remote repository branch
+                                                </p>
+                                            </div>
+                                            <div class="border-l-4 border-red-500">
+                                                <li class="p-2 rounded text-gray-600 font-bold">git pull</li>
+                                                <p class="text-gray-500 pl-2">
+                                                    fetch and merge any commits from the tracking remote branch
+                                                </p>
+                                            </div>
+
+                                        </ul>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- ------- -->
+                            <div id="temporary"
+                                class="shadow-lg rounded-lg overflow-hidden bg-white dark:bg-gray-800 dark:border-2 dark:border-gray-200">
+                                <div class="rounded-t-lg bg-gradient-to-r from-red-700 to-orange-600">
+                                    <div class="p-4 px-8">
+                                        <h2 class="text-lg font-bold text-white dark:text-gray-300"><a
+                                                href="#temporary">TEMPORARY COMMITS</a></h2>
+                                        <p class="text-gray-100">
+                                            Temporarily store modified, tracked files in order to change branches
+                                        </p>
+
+                                    </div>
+                                </div>
+                                <div class="px-8 py-4 space-y-2 bg-red-50">
+                                    <div class="text-sm text-gray-700 dark:text-gray-300 ">
+
+
+                                        <ul class="list-none list-inside space-y-4">
+                                            <div class="border-l-4 border-red-500">
+                                                <li class="p-2 rounded text-gray-600 font-bold">git stash</li>
+                                                <p class="text-gray-500 pl-2">
+                                                    Save modified and staged changes
+                                                </p>
+                                            </div>
+                                            <div class="border-l-4 border-red-500">
+                                                <li class="p-2 rounded text-gray-600 font-bold">git stash list
+                                                </li>
+                                                <p class="text-gray-500 pl-2">
+                                                    list stack-order of stashed file changes
+                                                </p>
+                                            </div>
+                                            <div class="border-l-4 border-red-500">
+                                                <li class="p-2 rounded text-gray-600 font-bold">git stash pop
+                                                </li>
+                                                <p class="text-gray-500 pl-2">
+                                                    write working from top of stash stack
+                                                </p>
+                                            </div>
+                                            <div class="border-l-4 border-red-500">
+                                                <li class="p-2 rounded text-gray-600 font-bold">git stash drop</li>
+                                                <p class="text-gray-500 pl-2">
+                                                    discard the changes from top of stash stack
+                                                </p>
+                                            </div>
+
+                                        </ul>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- ------- -->
+                            <div id="history"
+                                class="shadow-lg rounded-lg overflow-hidden bg-white dark:bg-gray-800 dark:border-2 dark:border-gray-200">
+                                <div class="rounded-t-lg bg-gradient-to-r from-red-700 to-orange-600">
+                                    <div class="p-4 px-8">
+                                        <h2 class="text-lg font-bold text-white dark:text-gray-300"><a
+                                                href="#history">REWRITE HISTORY</a></h2>
+                                        <p class="text-gray-100">
+                                            Rewriting branches, updating commits and clearing history
+                                        </p>
+
+                                    </div>
+                                </div>
+                                <div class="px-8 py-4 space-y-2 bg-red-50">
+                                    <div class="text-sm text-gray-700 dark:text-gray-300 ">
+
+
+                                        <ul class="list-none list-inside space-y-4">
+                                            <div class="border-l-4 border-red-500">
+                                                <li class="p-2 rounded text-gray-600 font-bold">git rebase [branch]</li>
+                                                <p class="text-gray-500 pl-2">
+                                                    apply any commits of current branch ahead of specified one
+                                                </p>
+                                            </div>
+                                            <div class="border-l-4 border-red-500">
+                                                <li class="p-2 rounded text-gray-600 font-bold">git reset --hard
+                                                    [commit]
+                                                </li>
+                                                <p class="text-gray-500 pl-2">
+                                                    clear staging area, rewrite working tree from specified commit
+                                                </p>
+                                            </div>
+
+                                        </ul>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- ------- -->
+                        </div>
+                    </div>
+                </div>
+            </main>
+            <div title="Back to top"
+                class="fixed right-5 bottom-5 bg-gray-900 text-white text-center p-5 cursor-pointer rounded-md border-2 dark:border dark:border-indigo-400 dark:hover:border-indigo-500"
+                style="display:none">
+                👆
+            </div>
+        </div>
+
+    </div>
+    <footer class="bg-gray-900 dark:bg-gray-800">
+        <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col justify-center items-center text-base text-gray-100 font-normal space-x-2">
+                <div>
+                    Created by
+                    <a href="" target="_blank" class="font-semibold text-red-400">omkar</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>
