@@ -32,7 +32,7 @@
 </head>
 
 <body class="bg-gray-800">
-    <div class="text-center p-8 bg-red-700 w-full text-white font-bold">
+    <div class="text-center p-4 bg-rose-800 w-full text-white font-bold">
         <p class=" text-2xl">Git cheatsheet </p>
         <span class="underline">maintained by omkar</span>
     </div>
@@ -47,7 +47,7 @@
                             <!---->
                             <div id="setup"
                                 class="shadow-lg rounded-lg overflow-hidden bg-white dark:bg-gray-800 dark:border-2 dark:border-gray-200">
-                                <div class="rounded-t-lg bg-gradient-to-r from-red-700 to-orange-600">
+                                <div class="rounded-t-lg bg-gradient-to-r from-rose-800 to-rose-700">
                                     <div class="p-4 px-8">
                                         <h2 class="text-lg font-bold text-white dark:text-gray-300"><a
                                                 href="#setup">SETUP</a></h2>
@@ -60,10 +60,9 @@
                                 <div class="px-8 py-4 space-y-2 bg-red-50">
                                     <div class="text-sm text-gray-700 dark:text-gray-300 ">
 
-                                        <ul class="list-none list-inside space-y-4 " x-data="{ open: false }">
-                                            <div class="border-l-4 border-red-500">
-                                                <li class="p-2 rounded text-gray-600 font-bold relative"
-                                                    x-on:mouseover="open = true" x-on:mouseout="open = false">git
+                                        <ul class="list-none list-inside space-y-4 ">
+                                            <div class="border-l-4 border-rose-700">
+                                                <li class="p-2 rounded text-gray-600 font-bold relative">git
                                                     config
                                                     --global
                                                     user.name
@@ -75,7 +74,7 @@
                                                 </p>
                                             </div>
 
-                                            <div class="border-l-4 border-red-500">
+                                            <div class="border-l-4 border-rose-700">
                                                 <li class="p-2 rounded text-gray-600 font-bold">git config --global
                                                     user.email
                                                     “[valid-email]”</li>
@@ -84,7 +83,7 @@
                                                     marker
                                                 </p>
                                             </div>
-                                            <div class="border-l-4 border-red-500">
+                                            <div class="border-l-4 border-rose-700">
                                                 <li class="p-2 rounded text-gray-600 font-bold">git config --global
                                                     color.ui
                                                     auto
@@ -102,7 +101,7 @@
                             <!---->
                             <div id="setup-init"
                                 class="shadow-lg rounded-lg overflow-hidden bg-white dark:bg-gray-800 dark:border-2 dark:border-gray-200">
-                                <div class="rounded-t-lg bg-gradient-to-r from-red-700 to-orange-600">
+                                <div class="rounded-t-lg bg-gradient-to-r from-rose-800 to-rose-700">
                                     <div class="p-4 px-8">
                                         <h2 class="text-lg font-bold text-white dark:text-gray-300"><a
                                                 href="#setup-init">SETUP & INIT</a></h2>
@@ -117,13 +116,13 @@
 
 
                                         <ul class="list-none list-inside space-y-4">
-                                            <div class="border-l-4 border-red-500">
+                                            <div class="border-l-4 border-rose-700">
                                                 <li class="p-2 rounded text-gray-600 font-bold">git init</li>
                                                 <p class="text-gray-500 pl-2">
                                                     initialize an existing directory as a Git repository
                                                 </p>
                                             </div>
-                                            <div class="border-l-4 border-red-500">
+                                            <div class="border-l-4 border-rose-700">
                                                 <li class="p-2 rounded text-gray-600 font-bold">git clone [url]</li>
                                                 </li>
                                                 <p class="text-gray-500 pl-2">
@@ -139,7 +138,7 @@
                             <!---->
                             <div id="stage"
                                 class="shadow-lg rounded-lg overflow-hidden bg-white dark:bg-gray-800 dark:border-2 dark:border-gray-200">
-                                <div class="rounded-t-lg bg-gradient-to-r from-red-700 to-orange-600">
+                                <div class="rounded-t-lg bg-gradient-to-r from-rose-800 to-rose-700">
                                     <div class="p-4 px-8">
                                         <h2 class="text-lg font-bold text-white dark:text-gray-300"><a
                                                 href="#stage">STAGE & SNAPSHOT</a></h2>
@@ -154,7 +153,7 @@
 
 
                                         <ul class="list-none list-inside space-y-4">
-                                            <div class="border-l-4 border-red-500">
+                                            <div class="border-l-4 border-rose-700">
                                                 <li class="p-2 rounded text-gray-600 font-bold">git status</li>
                                                 <p class="text-gray-500 pl-2">
                                                     show modified files in working directory, staged for your next
@@ -163,35 +162,35 @@
                                             </div>
 
 
-                                            <div class="border-l-4 border-red-500">
+                                            <div class="border-l-4 border-rose-700">
                                                 <li class="p-2 rounded text-gray-600 font-bold">git add [file]</li>
                                                 <p class="text-gray-500 pl-2">
                                                     add a file as it looks now to your next commit (stage)
                                                 </p>
                                             </div>
 
-                                            <div class="border-l-4 border-red-500">
+                                            <div class="border-l-4 border-rose-700">
                                                 <li class="p-2 rounded text-gray-600 font-bold">git reset [file]</li>
                                                 <p class="text-gray-500 pl-2">
                                                     unstage a file while retaining the changes in working directory
                                                 </p>
                                             </div>
 
-                                            <div class="border-l-4 border-red-500">
+                                            <div class="border-l-4 border-rose-700">
                                                 <li class="p-2 rounded text-gray-600 font-bold">git diff</li>
                                                 <p class="text-gray-500 pl-2">
                                                     diff of what is changed but not staged
                                                 </p>
                                             </div>
 
-                                            <div class="border-l-4 border-red-500">
+                                            <div class="border-l-4 border-rose-700">
                                                 <li class="p-2 rounded text-gray-600 font-bold">git diff --staged</li>
                                                 <p class="text-gray-500 pl-2">
                                                     diff of what is staged but not yet commited
                                                 </p>
                                             </div>
 
-                                            <div class="border-l-4 border-red-500">
+                                            <div class="border-l-4 border-rose-700">
                                                 <li class="p-2 rounded text-gray-600 font-bold">git commit -m
                                                     “[descriptive
                                                     message]”</li>
@@ -208,7 +207,7 @@
                             <!-- ------- -->
                             <div id="branch"
                                 class="shadow-lg rounded-lg overflow-hidden bg-white dark:bg-gray-800 dark:border-2 dark:border-gray-200">
-                                <div class="rounded-t-lg bg-gradient-to-r from-red-700 to-orange-600">
+                                <div class="rounded-t-lg bg-gradient-to-r from-rose-800 to-rose-700">
                                     <div class="p-4 px-8">
                                         <h2 class="text-lg font-bold text-white dark:text-gray-300"><a
                                                 href="#branch">BRANCH & MERGE</a></h2>
@@ -223,28 +222,28 @@
 
 
                                         <ul class="list-none list-inside space-y-4">
-                                            <div class="border-l-4 border-red-500">
+                                            <div class="border-l-4 border-rose-700">
                                                 <li class="p-2 rounded text-gray-600 font-bold">git branch</li>
                                                 <p class="text-gray-500 pl-2">
                                                     list your branches. a * will appear next to the currently active
                                                     branch
                                                 </p>
                                             </div>
-                                            <div class="border-l-4 border-red-500">
+                                            <div class="border-l-4 border-rose-700">
                                                 <li class="p-2 rounded text-gray-600 font-bold">git branch [branch-name
                                                 </li>
                                                 <p class="text-gray-500 pl-2">
                                                     create a new branch at the current commit
                                                 </p>
                                             </div>
-                                            <div class="border-l-4 border-red-500">
+                                            <div class="border-l-4 border-rose-700">
                                                 <li class="p-2 rounded text-gray-600 font-bold">git checkout</li>
                                                 <p class="text-gray-500 pl-2">
                                                     switch to another branch and check it out into your working
                                                     directory
                                                 </p>
                                             </div>
-                                            <div class="border-l-4 border-red-500">
+                                            <div class="border-l-4 border-rose-700">
                                                 <li class="p-2 rounded text-gray-600 font-bold">git merge [branch]</li>
                                                 <p class="text-gray-500 pl-2">
                                                     merge the specified branch’s history into the current one
@@ -258,7 +257,7 @@
                             <!-- ------- -->
                             <div id="inspect"
                                 class="shadow-lg rounded-lg overflow-hidden bg-white dark:bg-gray-800 dark:border-2 dark:border-gray-200">
-                                <div class="rounded-t-lg bg-gradient-to-r from-red-700 to-orange-600">
+                                <div class="rounded-t-lg bg-gradient-to-r from-rose-800 to-rose-700">
                                     <div class="p-4 px-8">
                                         <h2 class="text-lg font-bold text-white dark:text-gray-300"><a
                                                 href="#inspect">INSPECT & COMPARE</a></h2>
@@ -273,34 +272,34 @@
 
 
                                         <ul class="list-none list-inside space-y-4">
-                                            <div class="border-l-4 border-red-500">
+                                            <div class="border-l-4 border-rose-700">
                                                 <li class="p-2 rounded text-gray-600 font-bold">git log</li>
                                                 <p class="text-gray-500 pl-2">
                                                     show the commit history for the currently active branch
                                                 </p>
                                             </div>
-                                            <div class="border-l-4 border-red-500">
+                                            <div class="border-l-4 border-rose-700">
                                                 <li class="p-2 rounded text-gray-600 font-bold">git log branchB..branchA
                                                 </li>
                                                 <p class="text-gray-500 pl-2">
                                                     show the commits on branchA that are not on branchB
                                                 </p>
                                             </div>
-                                            <div class="border-l-4 border-red-500">
+                                            <div class="border-l-4 border-rose-700">
                                                 <li class="p-2 rounded text-gray-600 font-bold">git log --follow [file]
                                                 </li>
                                                 <p class="text-gray-500 pl-2">
                                                     show the commits that changed file, even across renames
                                                 </p>
                                             </div>
-                                            <div class="border-l-4 border-red-500">
+                                            <div class="border-l-4 border-rose-700">
                                                 <li class="p-2 rounded text-gray-600 font-bold">git diff
                                                     branchB...branchA</li>
                                                 <p class="text-gray-500 pl-2">
                                                     show the diff of what is in branchA that is not in branchB
                                                 </p>
                                             </div>
-                                            <div class="border-l-4 border-red-500">
+                                            <div class="border-l-4 border-rose-700">
                                                 <li class="p-2 rounded text-gray-600 font-bold">git show [SHA]</li>
                                                 <p class="text-gray-500 pl-2">
                                                     show any object in Git in human-readable format
@@ -315,7 +314,7 @@
                             <!-- ------- -->
                             <div id="share"
                                 class="shadow-lg rounded-lg overflow-hidden bg-white dark:bg-gray-800 dark:border-2 dark:border-gray-200">
-                                <div class="rounded-t-lg bg-gradient-to-r from-red-700 to-orange-600">
+                                <div class="rounded-t-lg bg-gradient-to-r from-rose-800 to-rose-700">
                                     <div class="p-4 px-8">
                                         <h2 class="text-lg font-bold text-white dark:text-gray-300"><a
                                                 href="#share">SHARE & UPDATE</a></h2>
@@ -330,21 +329,21 @@
 
 
                                         <ul class="list-none list-inside space-y-4">
-                                            <div class="border-l-4 border-red-500">
+                                            <div class="border-l-4 border-rose-700">
                                                 <li class="p-2 rounded text-gray-600 font-bold">git remote add [alias]
                                                     [url]</li>
                                                 <p class="text-gray-500 pl-2">
                                                     add a git URL as an alias
                                                 </p>
                                             </div>
-                                            <div class="border-l-4 border-red-500">
+                                            <div class="border-l-4 border-rose-700">
                                                 <li class="p-2 rounded text-gray-600 font-bold">git fetch [alias]
                                                 </li>
                                                 <p class="text-gray-500 pl-2">
                                                     fetch down all the branches from that Git remote
                                                 </p>
                                             </div>
-                                            <div class="border-l-4 border-red-500">
+                                            <div class="border-l-4 border-rose-700">
                                                 <li class="p-2 rounded text-gray-600 font-bold">git merge
                                                     [alias]/[branch]
                                                 </li>
@@ -353,14 +352,14 @@
                                                     date
                                                 </p>
                                             </div>
-                                            <div class="border-l-4 border-red-500">
+                                            <div class="border-l-4 border-rose-700">
                                                 <li class="p-2 rounded text-gray-600 font-bold">git push [alias]
                                                     [branch]</li>
                                                 <p class="text-gray-500 pl-2">
                                                     Transmit local branch commits to the remote repository branch
                                                 </p>
                                             </div>
-                                            <div class="border-l-4 border-red-500">
+                                            <div class="border-l-4 border-rose-700">
                                                 <li class="p-2 rounded text-gray-600 font-bold">git pull</li>
                                                 <p class="text-gray-500 pl-2">
                                                     fetch and merge any commits from the tracking remote branch
@@ -375,7 +374,7 @@
                             <!-- ------- -->
                             <div id="temporary"
                                 class="shadow-lg rounded-lg overflow-hidden bg-white dark:bg-gray-800 dark:border-2 dark:border-gray-200">
-                                <div class="rounded-t-lg bg-gradient-to-r from-red-700 to-orange-600">
+                                <div class="rounded-t-lg bg-gradient-to-r from-rose-800 to-rose-700">
                                     <div class="p-4 px-8">
                                         <h2 class="text-lg font-bold text-white dark:text-gray-300"><a
                                                 href="#temporary">TEMPORARY COMMITS</a></h2>
@@ -390,27 +389,27 @@
 
 
                                         <ul class="list-none list-inside space-y-4">
-                                            <div class="border-l-4 border-red-500">
+                                            <div class="border-l-4 border-rose-700">
                                                 <li class="p-2 rounded text-gray-600 font-bold">git stash</li>
                                                 <p class="text-gray-500 pl-2">
                                                     Save modified and staged changes
                                                 </p>
                                             </div>
-                                            <div class="border-l-4 border-red-500">
+                                            <div class="border-l-4 border-rose-700">
                                                 <li class="p-2 rounded text-gray-600 font-bold">git stash list
                                                 </li>
                                                 <p class="text-gray-500 pl-2">
                                                     list stack-order of stashed file changes
                                                 </p>
                                             </div>
-                                            <div class="border-l-4 border-red-500">
+                                            <div class="border-l-4 border-rose-700">
                                                 <li class="p-2 rounded text-gray-600 font-bold">git stash pop
                                                 </li>
                                                 <p class="text-gray-500 pl-2">
                                                     write working from top of stash stack
                                                 </p>
                                             </div>
-                                            <div class="border-l-4 border-red-500">
+                                            <div class="border-l-4 border-rose-700">
                                                 <li class="p-2 rounded text-gray-600 font-bold">git stash drop</li>
                                                 <p class="text-gray-500 pl-2">
                                                     discard the changes from top of stash stack
@@ -425,7 +424,7 @@
                             <!-- ------- -->
                             <div id="history"
                                 class="shadow-lg rounded-lg overflow-hidden bg-white dark:bg-gray-800 dark:border-2 dark:border-gray-200">
-                                <div class="rounded-t-lg bg-gradient-to-r from-red-700 to-orange-600">
+                                <div class="rounded-t-lg bg-gradient-to-r from-rose-800 to-rose-700">
                                     <div class="p-4 px-8">
                                         <h2 class="text-lg font-bold text-white dark:text-gray-300"><a
                                                 href="#history">REWRITE HISTORY</a></h2>
@@ -440,13 +439,13 @@
 
 
                                         <ul class="list-none list-inside space-y-4">
-                                            <div class="border-l-4 border-red-500">
+                                            <div class="border-l-4 border-rose-700">
                                                 <li class="p-2 rounded text-gray-600 font-bold">git rebase [branch]</li>
                                                 <p class="text-gray-500 pl-2">
                                                     apply any commits of current branch ahead of specified one
                                                 </p>
                                             </div>
-                                            <div class="border-l-4 border-red-500">
+                                            <div class="border-l-4 border-rose-700">
                                                 <li class="p-2 rounded text-gray-600 font-bold">git reset --hard
                                                     [commit]
                                                 </li>
@@ -478,7 +477,7 @@
             <div class="flex flex-col justify-center items-center text-base text-gray-100 font-normal space-x-2">
                 <div>
                     Created by
-                    <a href="" target="_blank" class="font-semibold text-red-400">omkar</a>
+                    <a href="" target="_blank" class="font-semibold text-rose-700">omkar</a>
                 </div>
             </div>
         </div>
