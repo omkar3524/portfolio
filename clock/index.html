@@ -6,252 +6,42 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Document</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous" />
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
-    crossorigin="anonymous"></script>
-  <style>
-    body{
-        background-color: #213239;
-    }
-    .timer {
-      border: 2px solid black;
-      padding: 20px 40px;
-      margin: 10px;
-    }
-
-    .card.active {
-      border: 2px solid greenyellow;
-      background-color: #adff2f;
-      color: #39560f;
-    }
-
-    .card:hover {
-      background-color: #f1f1f1;
-      border: 2px solid #f1f1f1;
-      cursor: pointer;
-      transform: scale(1.05);
-      transition: all 0.2s ease-in-out;
-    }
-
-    .card-body label {
-      font-size: 20px;
-      position: absolute;
-      top: 0;
-      left: 10px;
-      
-    }
-
-    .card-body span {
-      font-weight: 700;
-    }
-    
-
-    input.form-control {
-        background-color: #acc4cf;
-    }
-    input.form-control:focus {
-        background-color: #acc4cf;
-    }
-
-  </style>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body style="height: 100vh;" class="p-4">
-    <!-- create header with title is time tracking -->
-    <div class="mb-4">
-        <h1 class="text-center text-white">Time Tracking</h1>
-    </div>
+  <!-- create header with title is time tracking -->
+  <div class="mb-4">
+    <h1 class="text-center text-white">Time Tracking</h1>
+  </div>
   <div class="mb-4">
     <form>
       <div class="form-group mb-4">
         <label for="exampleInputEmail1">LABEL</label>
         <input type="text" class="form-control" placeholder="Enter label" list="task-lists">
         <datalist id="task-lists">
-            <option value="Guiding member">
-            <option value="PR review">
-            <option value="Task 1">
-            <option value="Task 2">
-          </datalist>
+          <option value="Guiding member">
+          <option value="PR review">
+          <option value="Task 1">
+          <option value="Task 2">
+        </datalist>
       </div>
       <div class="d-flex justify-content-between">
-          <button type="button" class="btn btn-primary" id="add-task-btn">Add clock</button>
-          <button type="button" class="btn btn-secondary" onclick="removeAllClocks()">Remove all</button>
-          <button type="button" class="btn btn-danger " onclick="pauseAll()">Pause</button>
+        <button type="button" class="btn btn-primary" id="add-task-btn">Add clock</button>
+        <button type="button" class="btn btn-secondary" onclick="removeAllClocks()">Remove all</button>
+        <button type="button" class="btn btn-danger " onclick="pauseAll()">Pause</button>
 
       </div>
     </form>
   </div>
 
   <div class="row" id="clock-container">
-    
+
   </div>
-  <!-- <div class="row justify-content-center align-items-center h-100">
-      <div class="col-sm-4">
-        <div class="text-center">
-          <button type="button" class="timer timer1" id="timer1" data-timer="1">
-            Guiding member
-            <p>00:00</p>
-          </button>
-        </div>
-      </div>
-      <div class="col-sm-4">
-        <div class="text-center">
-          <button type="button" class="timer timer2" id="timer2" data-timer="2">
-            PR review
-            <p>00:00</p>
-          </button>
-        </div>
-      </div>
-      <div class="col-sm-4">
-        <div class="text-center">
-          <button type="button" class="timer timer3" id="timer3" data-timer="3">
-            Task
-            <p>00:00</p>
-          </button>
-        </div>
-      </div>
-    </div> -->
 
-  <!-- <script>
-    let timervar = {
-      1: 0,
-      2: 0,
-      3: 0,
-    };
-    let timers = document.querySelectorAll(".timer");
-    var intervals = [];
-
-    let startTimer = function (timer) {
-      timer = timer.dataset.timer;
-
-      let element = document.getElementById(`timer${timer}`);
-      let para = element.querySelector("p");
-
-      intervals.forEach((interval) => {
-        clearInterval(interval);
-      });
-
-      let interval = setInterval(() => {
-        timervar[timer] += 1;
-        const result = new Date(timervar[timer] * 1000)
-          .toISOString()
-          .slice(11, 19);
-        para.innerHTML = result;
-      }, 1000);
-
-      intervals.push(interval);
-    };
-
-    timers.forEach((timer) => {
-      timer.addEventListener("click", () => {
-        // stopAll()
-        startTimer(timer);
-      });
-    });
-  </script> -->
-
-  <script>
-    let totalClocks = 0;
-    let clocksTime = {};
-    let allIntervals = [];
-
-    const clockContainer = document.getElementById("clock-container");
-    const addTaskBtn = document.getElementById("add-task-btn");
-
-    addTaskBtn.addEventListener("click", () => {
-      const label = document.querySelector("input").value;
-      if (!label) {
-        alert("Please enter label");
-        return;
-      }
-      //create unique data-clock id
-      const clockId = `clock-${totalClocks}`;
-      const time = 0;//new Date(0 * 1000).toISOString().slice(11, 19);
-
-      const card = document.createElement("div");
-      card.classList.add("col-sm-12", "col-md-6", "col-lg-4", "col-xl-3", "mb-2", "clock");
-      card.innerHTML = `
-          <div class="card" style="height: 150px; font-size: 40px;" data-clock="${clockId}">
-            <div class="card-body d-flex justify-content-center align-items-center ">
-              <span class="font-weight-bold">00:00:00</span>
-              <label for="">${label}</label>
-            </div>
-          </div>
-        `;
-
-      clockContainer.appendChild(card);
-      document.querySelector("input").value = "";
-
-      //add clock to clocksTime object
-      clocksTime[clockId] = time;
-        totalClocks += 1;
-      addEventListeners();
-      console.log(clocksTime)
-    });
-
-    function addEventListeners() {
-      const clocks = document.querySelectorAll(".clock");
-      clocks.forEach((clock) => {
-        clock.addEventListener("click", () => {
-          startClock(clock);
-        });
-      });
-    }
-
-
-    function startClock(clock) {
-        removeActiveClass()
-      const card = clock.querySelector('.card')
-      card.classList.add("active");
-      const clockId = card.dataset.clock;
-      console.log(clockId);
-
-      //clear all intervals
-      allIntervals.forEach((interval) => {
-        clearInterval(interval);
-      });
-
-      //start clock
-      const interval = setInterval(() => {
-        clocksTime[clockId] += 1;
-        const result = new Date(clocksTime[clockId] * 1000)
-          .toISOString()
-          .slice(11, 19);
-          card.querySelector("span").innerHTML = result;
-      }, 1000);
-
-        allIntervals.push(interval);
-        
-    }
-
-    function pauseAll() {
-      allIntervals.forEach((interval) => {
-        clearInterval(interval);
-
-        //remove active class
-        removeActiveClass()
-      });
-    }
-
-    function removeActiveClass() {
-      const cards = document.querySelectorAll(".card");
-      cards.forEach((card) => {
-        card.classList.remove("active");
-      });
-    }
-
-
-    function removeAllClocks() {
-      clockContainer.innerHTML = "";
-      clocksTime = {};
-      totalClocks = 0;
-    }
-
-
-
-  </script>
+  <script src="script.min.js"></script>
 </body>
 
 </html>
