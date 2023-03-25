@@ -5,40 +5,56 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Document</title>
+  <!-- og:tags -->
+    <meta property="og:title" content="Time tracking" />
+    <meta property="og:description" content="Time tracking" />
+    <meta property="og:url" content="https://omkar3524.github.io/portfolio/clock/" />
+    <meta property="og:site_name" content="Omkar verma" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
+    <meta name="description" content="Time tracking" />
+    <meta name="keywords" content="time tracking, clock, timer" />
+    <meta name="author" content="Omkar verma" />
+    <!-- og:image -->
+    <meta property="og:image" content="https://github.com/omkar3524/portfolio/blob/master/clock/Selection_055.png" />
+
+
+
+  <title>Time tracking</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"/>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
   <link rel="stylesheet" href="style.css">
 </head>
 
-<body style="height: 100vh;" class="p-4">
+<body>
   <!-- create header with title is time tracking -->
-  <div class="mb-4">
-    <h1 class="text-center text-white">Time Tracking</h1>
-  </div>
-  <div class="mb-4">
-    <form>
-      <div class="form-group mb-4">
-        <label for="exampleInputEmail1">LABEL</label>
-        <input type="text" class="form-control" placeholder="Enter label" list="task-lists">
-        <datalist id="task-lists">
-          <option value="Guiding member">
-          <option value="PR review">
-          <option value="Task 1">
-          <option value="Task 2">
-        </datalist>
+  <div class="container-fluid p-4">
+      <div class="header">
+          <div class="mb-4">
+            <h1 class="text-center text-white">Time Tracking</h1>
+          </div>
+          <div class="mb-4">
+            <form>
+              <div class="form-group mb-4">
+                <label for="exampleInputEmail1">LABEL</label>
+                <input type="text" class="form-control" placeholder="Enter label" list="task-lists">
+                <datalist id="task-lists">
+                  <option value="Guiding member">
+                  <option value="PR review">
+                  <option value="Task 1">
+                  <option value="Task 2">
+                </datalist>
+              </div>
+              <div class="d-flex justify-content-between">
+                <button type="button" class="btn btn-primary" id="add-task-btn">Add clock</button>
+                <button type="button" class="btn btn-secondary" onclick="removeAllClocks()">Remove all</button>
+                <button type="button" class="btn btn-danger " onclick="pauseAll()">Pause</button>
+              </div>
+            </form>
+          </div>
       </div>
-      <div class="d-flex justify-content-between">
-        <button type="button" class="btn btn-primary" id="add-task-btn">Add clock</button>
-        <button type="button" class="btn btn-secondary" onclick="removeAllClocks()">Remove all</button>
-        <button type="button" class="btn btn-danger " onclick="pauseAll()">Pause</button>
-
+      <div class="row" id="clock-container">
       </div>
-    </form>
-  </div>
-
-  <div class="row" id="clock-container">
-
   </div>
 
   <script src="script.min.js"></script>
