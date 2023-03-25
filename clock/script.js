@@ -105,7 +105,7 @@ function removeAllClocks() {
     clocksTime = {};
     totalClocks = 0;
     allIntervals = [];
-
+    storage = {};
     //remove stroage
     localStorage.removeItem("omkar-time-tracking");
 }
