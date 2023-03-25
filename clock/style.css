@@ -1,0 +1,42 @@
+body{
+    background-color: #213239;
+}
+.timer {
+  border: 2px solid black;
+  padding: 20px 40px;
+  margin: 10px;
+}
+
+.card.active {
+  border: 2px solid greenyellow;
+  background-color: #adff2f;
+  color: #39560f;
+}
+
+.card:hover {
+  background-color: #f1f1f1;
+  border: 2px solid #f1f1f1;
+  cursor: pointer;
+  transform: scale(1.05);
+  transition: all 0.2s ease-in-out;
+}
+
+.card-body label {
+  font-size: 20px;
+  position: absolute;
+  top: 0;
+  left: 10px;
+  
+}
+
+.card-body span {
+  font-weight: 700;
+}
+
+
+input.form-control {
+    background-color: #acc4cf;
+}
+input.form-control:focus {
+    background-color: #acc4cf;
+}
