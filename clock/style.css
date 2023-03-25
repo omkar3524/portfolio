@@ -14,8 +14,8 @@ body{
 }
 
 .card:hover {
-  background-color: #f1f1f1;
-  border: 2px solid #f1f1f1;
+  background-color: #d8d8d8;
+  border: 2px solid #dfe0de;
   cursor: pointer;
   transform: scale(1.05);
   transition: all 0.2s ease-in-out;
@@ -39,4 +39,14 @@ input.form-control {
 }
 input.form-control:focus {
     background-color: #acc4cf;
+}
+
+@media screen and (max-width: 768px) {
+    .card:hover {
+        background-color: #adff2f;
+        border: 2px solid #adff2f;
+        cursor: pointer;
+        transform: scale(1.05);
+        transition: all 0.2s ease-in-out;
+      }
 }
