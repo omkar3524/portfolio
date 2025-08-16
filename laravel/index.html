@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tips - Dynamic Relationships in Laravel</title>
+    <link rel="stylesheet" href="../styles.css">
+    <!-- Prism.js for code highlighting -->
+    <link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    <style>
+        body {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: #181a1b;
+            color: #e2e8f0;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+            font-family: 'Segoe UI', 'Helvetica Neue', Arial, 'Liberation Sans', sans-serif;
+            display: flex;
+            flex-direction: row;
+            gap: 2rem;
+        }
+
+        h1,
+        h2 {
+            color: #38bdf8;
+        }
+
+        pre {
+            background: #23272e;
+            padding: 1em;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+
+        code {
+            color: #38bdf8;
+            background: #23272e;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+
+        .note {
+            background: #24343d;
+            border-left: 4px solid #38b2ac;
+            padding: 1em;
+            margin: 1em 0;
+            border-radius: 4px;
+            color: #e2e8f0;
+        }
+
+        a {
+            color: #63b3ed;
+        }
+
+        .sidebar {
+            width: 220px;
+            min-width: 180px;
+            max-width: 240px;
+            background: #23272e;
+            border-radius: 8px;
+            padding: 1.5rem 1rem;
+            height: fit-content;
+            position: sticky;
+            top: 2rem;
+            align-self: flex-start;
+        }
+
+        .sidebar h3 {
+            color: #38bdf8;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            letter-spacing: 0.03em;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .sidebar li {
+            margin-bottom: 0.7rem;
+        }
+
+        .sidebar a {
+            color: #e2e8f0;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: color 0.2s;
+        }
+
+        .sidebar a:hover,
+        .sidebar a.active {
+            color: #38bdf8;
+        }
+
+        .content {
+            flex: 1 1 0%;
+            min-width: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="sidebar">
+        <h3>Topics</h3>
+        <ul>
+            <li><a href="#computed-column-last-login-at">Using Subqueries to get column</a></li>
+            <li><a href="#dynamic-relationships">Dynamic Relationships in Laravel</a></li>
+        </ul>
+    </nav>
+    <main class="content">
+        <h1 id="computed-column-last-login-at">Using Subqueries to Get the Last Login Date</h1>
+        <p>
+            You can add a computed column <code>last_login_at</code> to each user using a subquery:
+        </p>
+        <pre><code class="language-php">$users = User::query()
+                ->addSelect(['last_login_at' => Login::select('created_at')
+                ->whereColumn('user_id', 'users.id')
+                ->orderByDesc('created_at')
+                ->limit(1)
+                ])
+                ->get();</code></pre>
+        <p>
+            This adds a computed column <code>last_login_at</code> to each user.
+        </p>
+        <p>
+            Update the Blade view to display this new attribute:
+        </p>
+        <pre><code class="language-blade">{{ $user->last_login_at }}</code></pre>
+        <p>
+            Note that we no longer have the <code>diffForHumans</code> formatting because this is now a string, not a
+            Carbon instance.
+        </p>
+        <h2>Fixing Date Formatting with Query-Time Casting</h2>
+        <p>
+            Back in the Blade view, adding <code>diffForHumans()</code> to <code>last_login_at</code> causes an error
+            because it's a string, not a Carbon instance.
+        </p>
+        <p>
+            Previously, this worked because the login model cast the <code>created_at</code> attribute to Carbon
+            automatically.
+        </p>
+        <p>
+            Now that we're getting the date directly in the users query, this casting doesn't happen.
+        </p>
+        <p>
+            Laravel provides an elegant solution called <strong>query-time casting</strong>.
+        </p>
+        <p>
+            Update the query to add a cast:
+        </p>
+        <pre><code class="language-php">$users = User::query()
+                ->addSelect(['last_login_at' => Login::select('created_at')
+                ->whereColumn('user_id', 'users.id')
+                ->orderByDesc('created_at')
+                ->limit(1)
+                ])
+                ->withCasts(['last_login_at' => 'datetime'])
+                ->get();</code></pre>
+        <p>
+            Now, in the Blade view, <code>diffForHumans()</code> works again:
+        </p>
+        <pre><code class="language-blade">{{ $user->last_login_at->diffForHumans() }}</code></pre>
+
+        <h1 id="dynamic-relationships">Dynamic Relationships in Laravel</h1>
+        <p>We can achieve this using <strong>dynamic relationships</strong>.</p>
+
+        <h2>Step 1: Update the <code>User</code> Model</h2>
+        <ol>
+            <li>Remove the two last login scopes in the <code>User</code> model.</li>
+            <li>Add a new <code>lastLogin</code> <code>belongsTo</code> relationship:</li>
+        </ol>
+        <pre><code class="language-php">public function lastLogin()
+                {
+                return $this->belongsTo(Login::class, 'last_login_id');
+                }</code></pre>
+        <p>Normally, for a <code>belongsTo</code> relationship to work, the <code>users</code> table needs a foreign key
+            column—in this case, <code>last_login_id</code>. Since our <code>users</code> table does not have this
+            column, we'll use a subquery to select it instead.</p>
+
+        <h2>Step 2: Create a <code>withLastLogin</code> Scope</h2>
+        <pre><code class="language-php">public function scopeWithLastLogin($query)
+                {
+                $query->addSelect(['last_login_id' => Login::select('id')
+                ->whereColumn('user_id', 'users.id')
+                ->orderByDesc('created_at')
+                ->limit(1)
+                ])->with('lastLogin');
+                }</code></pre>
+        <p>This adds a computed <code>last_login_id</code> column and eager loads the <code>lastLogin</code>
+            relationship automatically. Eloquent treats this computed column as if it were a real column, so everything
+            works seamlessly.</p>
+
+        <h2>Step 3: Update the Query in <code>UserController</code></h2>
+        <pre><code class="language-php">$users = User::withLastLogin()->paginate();</code></pre>
+        <p>In the Blade view, instead of using the <code>last_login_at</code> attribute, use the <code>lastLogin</code>
+            relationship to access properties:</p>
+        <pre><code class="language-blade">{{ $user->lastLogin->created_at->diffForHumans() }}
+                {{ $user->lastLogin->ip_address }}</code></pre>
+        <p>Refreshing the browser shows everything works as expected.</p>
+
+        <div class="note">
+            <strong>Important Note on Lazy Loading:</strong><br>
+            You cannot lazy load dynamic relationships because unless you explicitly call the <code>withLastLogin</code>
+            scope, the <code>last_login_id</code> won't be present on the model. This isn't usually an issue since
+            dynamic relationships are typically used to solve performance problems where lazy loading is not ideal.
+        </div>
+    </main>
+
+    <!-- Prism.js script -->
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-php.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-markup-templating.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-blade.min.js"></script>
+</body>
+
+</html>
