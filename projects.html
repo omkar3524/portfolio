@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects - Omkar Laravel Developer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        .card-hover { transition: all 0.3s ease; }
+        .card-hover:hover { transform: translateY(-5px); box-shadow: 0 15px 35px rgba(0,0,0,0.1); }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <a href="index.html" class="text-2xl font-bold text-gray-800">Omkar</a>
+                <div class="hidden md:flex space-x-8">
+                    <a href="index.html" class="text-gray-600 hover:text-indigo-600">Home</a>
+                    <a href="projects.html" class="text-indigo-600 font-medium">Projects</a>
+                    <a href="laravel/index.html" class="text-gray-600 hover:text-indigo-600">Laravel Tips</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Projects Header -->
+    <section class="py-20 bg-gradient-to-r from-indigo-600 to-purple-600 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-5xl font-bold mb-4">My Projects</h1>
+            <p class="text-xl">A showcase of Laravel applications I've built over the years</p>
+        </div>
+    </section>
+
+    <!-- Projects Grid -->
+    <section class="py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- E-commerce Platform -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
+                    <div class="h-48 bg-gradient-to-r from-pink-500 to-rose-500 flex items-center justify-center">
+                        <i class="fas fa-shopping-cart text-6xl text-white"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">E-commerce Platform</h3>
+                        <p class="text-gray-600 mb-4">Full-featured e-commerce solution with Stripe payment integration, inventory management, and admin dashboard.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="bg-red-100 text-red-800 px-2 py-1 rounded text-sm">Laravel</span>
+                            <span class="bg-purple-100 text-purple-800 px-2 py-1 rounded text-sm">Stripe</span>
+                            <span class="bg-green-100 text-green-800 px-2 py-1 rounded text-sm">Vue.js</span>
+                        </div>
+                        <div class="flex space-x-3">
+                            <a href="#" class="text-indigo-600 hover:text-indigo-800"><i class="fab fa-github mr-1"></i>Code</a>
+                            <a href="#" class="text-indigo-600 hover:text-indigo-800"><i class="fas fa-external-link-alt mr-1"></i>Live</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SaaS Application -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
+                    <div class="h-48 bg-gradient-to-r from-blue-500 to-cyan-500 flex items-center justify-center">
+                        <i class="fas fa-cloud text-6xl text-white"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">SaaS Dashboard</h3>
+                        <p class="text-gray-600 mb-4">Multi-tenant SaaS application with subscription billing, analytics dashboard, and API integrations.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="bg-red-100 text-red-800 px-2 py-1 rounded text-sm">Laravel</span>
+                            <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-sm">MySQL</span>
+                            <span class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded text-sm">Chart.js</span>
+                        </div>
+                        <div class="flex space-x-3">
+                            <a href="#" class="text-indigo-600 hover:text-indigo-800"><i class="fab fa-github mr-1"></i>Code</a>
+                            <a href="#" class="text-indigo-600 hover:text-indigo-800"><i class="fas fa-external-link-alt mr-1"></i>Demo</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- API Service -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
+                    <div class="h-48 bg-gradient-to-r from-green-500 to-emerald-500 flex items-center justify-center">
+                        <i class="fas fa-cogs text-6xl text-white"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">REST API Service</h3>
+                        <p class="text-gray-600 mb-4">Scalable REST API with authentication, rate limiting, and comprehensive documentation.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="bg-red-100 text-red-800 px-2 py-1 rounded text-sm">Laravel</span>
+                            <span class="bg-orange-100 text-orange-800 px-2 py-1 rounded text-sm">Sanctum</span>
+                            <span class="bg-gray-100 text-gray-800 px-2 py-1 rounded text-sm">Swagger</span>
+                        </div>
+                        <div class="flex space-x-3">
+                            <a href="#" class="text-indigo-600 hover:text-indigo-800"><i class="fab fa-github mr-1"></i>Code</a>
+                            <a href="#" class="text-indigo-600 hover:text-indigo-800"><i class="fas fa-book mr-1"></i>Docs</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CRM System -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
+                    <div class="h-48 bg-gradient-to-r from-purple-500 to-indigo-500 flex items-center justify-center">
+                        <i class="fas fa-users text-6xl text-white"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">CRM System</h3>
+                        <p class="text-gray-600 mb-4">Customer relationship management system with lead tracking, email automation, and reporting.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="bg-red-100 text-red-800 px-2 py-1 rounded text-sm">Laravel</span>
+                            <span class="bg-green-100 text-green-800 px-2 py-1 rounded text-sm">Vue.js</span>
+                            <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-sm">Queues</span>
+                        </div>
+                        <div class="flex space-x-3">
+                            <a href="#" class="text-indigo-600 hover:text-indigo-800"><i class="fab fa-github mr-1"></i>Code</a>
+                            <a href="#" class="text-indigo-600 hover:text-indigo-800"><i class="fas fa-external-link-alt mr-1"></i>Live</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Real Estate Platform -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
+                    <div class="h-48 bg-gradient-to-r from-orange-500 to-red-500 flex items-center justify-center">
+                        <i class="fas fa-home text-6xl text-white"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Real Estate Platform</h3>
+                        <p class="text-gray-600 mb-4">Property listing platform with advanced search, map integration, and virtual tours.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="bg-red-100 text-red-800 px-2 py-1 rounded text-sm">Laravel</span>
+                            <span class="bg-green-100 text-green-800 px-2 py-1 rounded text-sm">Maps API</span>
+                            <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-sm">Elasticsearch</span>
+                        </div>
+                        <div class="flex space-x-3">
+                            <a href="#" class="text-indigo-600 hover:text-indigo-800"><i class="fab fa-github mr-1"></i>Code</a>
+                            <a href="#" class="text-indigo-600 hover:text-indigo-800"><i class="fas fa-external-link-alt mr-1"></i>Demo</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Learning Management System -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
+                    <div class="h-48 bg-gradient-to-r from-teal-500 to-blue-500 flex items-center justify-center">
+                        <i class="fas fa-graduation-cap text-6xl text-white"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Learning Management System</h3>
+                        <p class="text-gray-600 mb-4">Online learning platform with video streaming, quizzes, certificates, and progress tracking.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="bg-red-100 text-red-800 px-2 py-1 rounded text-sm">Laravel</span>
+                            <span class="bg-purple-100 text-purple-800 px-2 py-1 rounded text-sm">Stripe</span>
+                            <span class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded text-sm">Video.js</span>
+                        </div>
+                        <div class="flex space-x-3">
+                            <a href="#" class="text-indigo-600 hover:text-indigo-800"><i class="fab fa-github mr-1"></i>Code</a>
+                            <a href="#" class="text-indigo-600 hover:text-indigo-800"><i class="fas fa-external-link-alt mr-1"></i>Demo</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 bg-gradient-to-r from-indigo-600 to-purple-600 text-white">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl font-bold mb-4">Ready to Start Your Project?</h2>
+            <p class="text-xl mb-8">Let's discuss how I can help bring your Laravel application to life</p>
+            <a href="index.html#contact" class="bg-yellow-400 text-gray-900 px-8 py-3 rounded-lg font-semibold hover:bg-yellow-300 transition-colors">
+                Get In Touch
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 2024 Omkar. Built with ❤️ using Laravel & Tailwind CSS.</p>
+        </div>
+    </footer>
+</body>
+</html>
