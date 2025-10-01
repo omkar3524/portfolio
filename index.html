@@ -168,6 +168,40 @@
                 color: #4f46e5;
             }
         }
+
+        /* Hero tech logos */
+        .tech-logo {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transform: scale(0);
+            transition: all 0.3s ease;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        .tech-logo i {
+            font-size: 20px;
+            color: white;
+        }
+
+        .tech-logo.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .hero-container {
+            position: relative;
+            overflow: hidden;
+        }
     </style>
 </head>
 
@@ -202,7 +236,33 @@
     </nav>
 
     <!-- Hero Section -->
-    <section id="home" class="min-h-screen gradient-bg flex items-center pt-20">
+    <section id="home" class="min-h-screen gradient-bg flex items-center pt-20 hero-container">
+        <!-- Tech logos -->
+        <div class="tech-logo" id="logo-php">
+            <i class="fab fa-php"></i>
+        </div>
+        <div class="tech-logo" id="logo-js">
+            <i class="fab fa-js"></i>
+        </div>
+        <div class="tech-logo" id="logo-html">
+            <i class="fab fa-html5"></i>
+        </div>
+        <div class="tech-logo" id="logo-css">
+            <i class="fab fa-css3-alt"></i>
+        </div>
+        <div class="tech-logo" id="logo-git">
+            <i class="fab fa-git-alt"></i>
+        </div>
+        <div class="tech-logo" id="logo-docker">
+            <i class="fab fa-docker"></i>
+        </div>
+        <div class="tech-logo" id="logo-aws">
+            <i class="fab fa-aws"></i>
+        </div>
+        <div class="tech-logo" id="logo-node">
+            <i class="fab fa-node-js"></i>
+        </div>
+
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
                 <div class="text-white slide-in-left hero-text">
@@ -230,10 +290,28 @@
                         <div class="w-60 h-60 sm:w-72 sm:h-72 lg:w-80 lg:h-80 mx-auto bg-white/10 rounded-full flex items-center justify-center float-animation">
                             <i class="fab fa-laravel text-6xl sm:text-7xl lg:text-8xl text-red-500"></i>
                         </div>
-                        <div class="absolute top-10 right-10 w-16 h-16 bg-yellow-400 rounded-full flex items-center justify-center">
+                        <!-- Vue.js - Top Right -->
+                        <div class="absolute top-8 right-8 w-16 h-16 bg-yellow-400 rounded-full flex items-center justify-center">
                             <i class="fab fa-vuejs text-2xl text-green-600"></i>
                         </div>
-                        <div class="absolute bottom-10 left-10 w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center">
+                        <!-- AWS - Right Center -->
+                        <div class="absolute top-1/2 right-2 w-16 h-16 bg-orange-400 rounded-full flex items-center justify-center transform -translate-y-1/2">
+                            <i class="fab fa-aws text-2xl text-white"></i>
+                        </div>
+                        <!-- Docker - Bottom Right -->
+                        <div class="absolute bottom-8 right-8 w-16 h-16 bg-green-500 rounded-full flex items-center justify-center">
+                            <i class="fab fa-docker text-2xl text-white"></i>
+                        </div>
+                        <!-- Auth0 - Top Left -->
+                        <div class="absolute top-8 left-8 w-16 h-16 bg-orange-500 rounded-full flex items-center justify-center">
+                            <i class="fas fa-shield-alt text-2xl text-white"></i>
+                        </div>
+                        <!-- PayPal - Left Center -->
+                        <div class="absolute top-1/2 left-2 w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center transform -translate-y-1/2">
+                            <i class="fab fa-paypal text-2xl text-white"></i>
+                        </div>
+                        <!-- Stripe - Bottom Left -->
+                        <div class="absolute bottom-8 left-8 w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center">
                             <i class="fab fa-stripe text-2xl text-white"></i>
                         </div>
                     </div>
@@ -261,8 +339,8 @@
                     </p>
                     <p class="text-gray-600 mb-6">
                         I believe in writing clean, maintainable code and following best practices. My experience with
-                        payment integrations, particularly Stripe, has given me insights into building secure and
-                        reliable financial applications.
+                        payment integrations and third-party services has given me insights into building secure and
+                        reliable applications that handle sensitive data and complex business logic.
                     </p>
                     <div class="flex space-x-4">
                         <a href="#" class="text-indigo-600 hover:text-indigo-800 text-2xl">
@@ -286,11 +364,11 @@
                             </div>
                             <div class="flex items-center">
                                 <i class="fas fa-code mr-3"></i>
-                                <span>50+ Projects Completed</span>
+                                <span>5+ Projects Completed</span>
                             </div>
                             <div class="flex items-center">
                                 <i class="fas fa-users mr-3"></i>
-                                <span>Happy Clients Worldwide</span>
+                                <span>Happy Clients</span>
                             </div>
                             <div class="flex items-center">
                                 <i class="fas fa-coffee mr-3"></i>
@@ -310,7 +388,7 @@
                 <h2 class="text-3xl lg:text-4xl font-bold text-gray-800 mb-4">Technical Skills</h2>
                 <p class="text-lg lg:text-xl text-gray-600">Technologies I work with on a daily basis</p>
             </div>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 gap-6 lg:gap-8">
                 <!-- Laravel -->
                 <div class="bg-white p-6 rounded-xl shadow-lg card-hover text-center fade-in-up">
                     <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -346,35 +424,236 @@
                     <h3 class="text-xl font-semibold text-gray-800 mb-2">Livewire</h3>
                     <p class="text-gray-600 text-sm">Dynamic Laravel components</p>
                 </div>
+
+                <!-- Tailwind CSS -->
+                <div class="bg-white p-6 rounded-xl shadow-lg card-hover text-center fade-in-up">
+                    <div class="w-16 h-16 bg-cyan-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-wind text-2xl text-cyan-600"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Tailwind CSS</h3>
+                    <p class="text-gray-600 text-sm">Utility-first CSS framework</p>
+                </div>
+
+                <!-- Alpine.js -->
+                <div class="bg-white p-6 rounded-xl shadow-lg card-hover text-center fade-in-up">
+                    <div class="w-16 h-16 bg-teal-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-mountain text-2xl text-teal-600"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Alpine.js</h3>
+                    <p class="text-gray-600 text-sm">Lightweight JavaScript framework</p>
+                </div>
+
+                <!-- Redis -->
+                <div class="bg-white p-6 rounded-xl shadow-lg card-hover text-center fade-in-up">
+                    <div class="w-16 h-16 bg-red-50 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-memory text-2xl text-red-500"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Redis</h3>
+                    <p class="text-gray-600 text-sm">In-memory data structure store</p>
+                </div>
+
+                <!-- OAuth & SSO -->
+                <div class="bg-white p-6 rounded-xl shadow-lg card-hover text-center fade-in-up">
+                    <div class="w-16 h-16 bg-green-50 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-shield-alt text-2xl text-green-600"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">OAuth & SSO</h3>
+                    <p class="text-gray-600 text-sm">Google, Facebook authentication</p>
+                </div>
             </div>
 
             <!-- Additional Skills -->
             <div class="mt-12 lg:mt-16 fade-in-up">
                 <h3 class="text-xl lg:text-2xl font-bold text-gray-800 text-center mb-6 lg:mb-8">Additional Expertise</h3>
-                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
-                    <div class="bg-white p-4 rounded-lg text-center shadow card-hover">
-                        <i class="fab fa-stripe text-2xl text-purple-600 mb-2"></i>
-                        <p class="text-sm font-medium">Stripe</p>
+                <div class="flex flex-wrap justify-center gap-6 lg:gap-8">
+                    <div class="flex flex-col items-center group">
+                        <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-purple-600 rounded-full flex items-center justify-center text-white hover:from-purple-600 hover:to-purple-700 transition-all duration-300 transform hover:scale-110 shadow-lg hover:shadow-xl">
+                            <i class="fab fa-stripe text-xl"></i>
+                        </div>
+                        <span class="text-sm font-medium text-gray-700 mt-2 group-hover:text-purple-600 transition-colors">Stripe</span>
                     </div>
-                    <div class="bg-white p-4 rounded-lg text-center shadow card-hover">
-                        <i class="fab fa-php text-2xl text-indigo-600 mb-2"></i>
-                        <p class="text-sm font-medium">PHP</p>
+
+                    <div class="flex flex-col items-center group">
+                        <div class="w-16 h-16 bg-gradient-to-br from-indigo-500 to-indigo-600 rounded-full flex items-center justify-center text-white hover:from-indigo-600 hover:to-indigo-700 transition-all duration-300 transform hover:scale-110 shadow-lg hover:shadow-xl">
+                            <i class="fab fa-php text-xl"></i>
+                        </div>
+                        <span class="text-sm font-medium text-gray-700 mt-2 group-hover:text-indigo-600 transition-colors">PHP</span>
                     </div>
-                    <div class="bg-white p-4 rounded-lg text-center shadow card-hover">
-                        <i class="fab fa-js text-2xl text-yellow-600 mb-2"></i>
-                        <p class="text-sm font-medium">JavaScript</p>
+
+                    <div class="flex flex-col items-center group">
+                        <div class="w-16 h-16 bg-gradient-to-br from-yellow-500 to-yellow-600 rounded-full flex items-center justify-center text-white hover:from-yellow-600 hover:to-yellow-700 transition-all duration-300 transform hover:scale-110 shadow-lg hover:shadow-xl">
+                            <i class="fab fa-js text-xl"></i>
+                        </div>
+                        <span class="text-sm font-medium text-gray-700 mt-2 group-hover:text-yellow-600 transition-colors">JavaScript</span>
                     </div>
-                    <div class="bg-white p-4 rounded-lg text-center shadow card-hover">
-                        <i class="fab fa-git-alt text-2xl text-orange-600 mb-2"></i>
-                        <p class="text-sm font-medium">Git</p>
+
+                    <div class="flex flex-col items-center group">
+                        <div class="w-16 h-16 bg-gradient-to-br from-orange-500 to-orange-600 rounded-full flex items-center justify-center text-white hover:from-orange-600 hover:to-orange-700 transition-all duration-300 transform hover:scale-110 shadow-lg hover:shadow-xl">
+                            <i class="fab fa-git-alt text-xl"></i>
+                        </div>
+                        <span class="text-sm font-medium text-gray-700 mt-2 group-hover:text-orange-600 transition-colors">Git</span>
                     </div>
-                    <div class="bg-white p-4 rounded-lg text-center shadow card-hover">
-                        <i class="fab fa-aws text-2xl text-orange-600 mb-2"></i>
-                        <p class="text-sm font-medium">AWS</p>
+
+                    <div class="flex flex-col items-center group">
+                        <div class="w-16 h-16 bg-gradient-to-br from-orange-400 to-orange-500 rounded-full flex items-center justify-center text-white hover:from-orange-500 hover:to-orange-600 transition-all duration-300 transform hover:scale-110 shadow-lg hover:shadow-xl">
+                            <i class="fab fa-aws text-xl"></i>
+                        </div>
+                        <span class="text-sm font-medium text-gray-700 mt-2 group-hover:text-orange-500 transition-colors">AWS</span>
                     </div>
-                    <div class="bg-white p-4 rounded-lg text-center shadow card-hover">
-                        <i class="fas fa-cogs text-2xl text-gray-600 mb-2"></i>
-                        <p class="text-sm font-medium">REST APIs</p>
+
+                    <div class="flex flex-col items-center group">
+                        <div class="w-16 h-16 bg-gradient-to-br from-gray-500 to-gray-600 rounded-full flex items-center justify-center text-white hover:from-gray-600 hover:to-gray-700 transition-all duration-300 transform hover:scale-110 shadow-lg hover:shadow-xl">
+                            <i class="fas fa-cogs text-xl"></i>
+                        </div>
+                        <span class="text-sm font-medium text-gray-700 mt-2 group-hover:text-gray-600 transition-colors">REST APIs</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-16 lg:py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12 lg:mb-16 fade-in-up">
+                <h2 class="text-3xl lg:text-4xl font-bold text-gray-800 mb-4">Featured Projects</h2>
+                <p class="text-lg lg:text-xl text-gray-600">A showcase of applications I've built and contributed to
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Project 1 - Dynamhex -->
+                <div class="bg-gray-50 rounded-xl overflow-hidden shadow-lg card-hover fade-in-up">
+                    <div class="h-48 bg-gray-200 overflow-hidden">
+                        <img src="images/Dynmhx.png" alt="Dynamhex" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-xl font-bold text-gray-800">Dynamhex</h3>
+                            <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
+                                <i class="fas fa-leaf text-2xl text-green-600"></i>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 mb-4">
+                            Monitors and visualizes complex energy consumption data for individual, corporate and government entities. Let's fight against climate change.
+                        </p>
+                        <a href="https://dynmhx.io" target="_blank" 
+                           class="inline-flex items-center text-indigo-600 hover:text-indigo-800 font-medium">
+                            Visit Site
+                            <i class="fas fa-external-link-alt ml-2 text-sm"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 2 - RoofTop Measurements -->
+                <div class="bg-gray-50 rounded-xl overflow-hidden shadow-lg card-hover fade-in-up">
+                    <div class="h-48 bg-gray-200 overflow-hidden">
+                        <img src="images/rooftopmeasurements.png" alt="RoofTop Measurements" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-xl font-bold text-gray-800">RoofTop Measurements</h3>
+                            <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
+                                <i class="fas fa-home text-2xl text-blue-600"></i>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 mb-4">
+                            Provides comprehensive reports on roof top measurements USA within 1 business day. Professional measurement services for contractors and homeowners.
+                        </p>
+                        <a href="https://www.rooftopmeasurements.com" target="_blank" 
+                           class="inline-flex items-center text-indigo-600 hover:text-indigo-800 font-medium">
+                            Visit Site
+                            <i class="fas fa-external-link-alt ml-2 text-sm"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 3 - Standard Backing -->
+                <div class="bg-gray-50 rounded-xl overflow-hidden shadow-lg card-hover fade-in-up">
+                    <div class="h-48 bg-gray-200 overflow-hidden">
+                        <img src="images/standardbacking.png" alt="Standard Backing" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-xl font-bold text-gray-800">Standard Backing</h3>
+                            <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center">
+                                <i class="fas fa-coins text-2xl text-purple-600"></i>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 mb-4">
+                            A poker staking company that offers advanced poker training, cashouts, and unlimited bankroll to take your game further.
+                        </p>
+                        <a href="https://standardbacking.com" target="_blank" 
+                           class="inline-flex items-center text-indigo-600 hover:text-indigo-800 font-medium">
+                            Visit Site
+                            <i class="fas fa-external-link-alt ml-2 text-sm"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 4 - Simpletrics -->
+                <div class="bg-gray-50 rounded-xl overflow-hidden shadow-lg card-hover fade-in-up">
+                    <div class="h-48 bg-gray-200 overflow-hidden">
+                        <img src="images/simpletrics.jpg" alt="Simpletrics" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-xl font-bold text-gray-800">Simpletrics</h3>
+                            <div class="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center">
+                                <i class="fas fa-chart-bar text-2xl text-orange-600"></i>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 mb-4">
+                            Amazon seller's software suite including analytics, accounting, profit estimation, and inventory management tools for e-commerce businesses.
+                        </p>
+                        <a href="https://simpletrics.com" target="_blank" 
+                           class="inline-flex items-center text-indigo-600 hover:text-indigo-800 font-medium">
+                            Visit Site
+                            <i class="fas fa-external-link-alt ml-2 text-sm"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 5 - ShowMe Caribbean -->
+                <div class="bg-gray-50 rounded-xl overflow-hidden shadow-lg card-hover fade-in-up">
+                    <div class="h-48 bg-gray-200 overflow-hidden">
+                        <img src="images/showmecarribean.png" alt="ShowMe Caribbean" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-xl font-bold text-gray-800">ShowMe Caribbean</h3>
+                            <div class="w-12 h-12 bg-pink-100 rounded-full flex items-center justify-center">
+                                <i class="fas fa-vr-cardboard text-2xl text-pink-600"></i>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 mb-4">
+                            A small and passionate team dedicated to virtual reality tools. Working with immersive technology to help customers stand out in the digital crowd.
+                        </p>
+                        <a href="https://showmecaribbean.com" target="_blank" 
+                           class="inline-flex items-center text-indigo-600 hover:text-indigo-800 font-medium">
+                            Visit Site
+                            <i class="fas fa-external-link-alt ml-2 text-sm"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- More Projects Card -->
+                <div class="bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl overflow-hidden shadow-lg card-hover fade-in-up">
+                    <div class="p-6 text-white">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-xl font-bold">More Projects</h3>
+                            <div class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center">
+                                <i class="fas fa-plus text-2xl text-white"></i>
+                            </div>
+                        </div>
+                        <p class="text-white/90 mb-6">
+                            Interested in seeing more of my work? Check out my GitHub profile for additional projects and open source contributions.
+                        </p>
+                        <a href="#contact" 
+                           class="inline-flex items-center bg-white text-indigo-600 px-4 py-2 rounded-lg font-medium hover:bg-gray-100 transition-colors">
+                            Get In Touch
+                            <i class="fas fa-arrow-right ml-2 text-sm"></i>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -401,7 +680,7 @@
                             <p class="text-indigo-600 font-medium">2020 - Present</p>
                             <p class="text-gray-600 mt-2">
                                 Leading development of complex web applications, implementing payment systems with Stripe,
-                                and mentoring junior developers. Built scalable APIs serving millions of requests.
+                                and mentoring junior developers.
                             </p>
                             <div class="flex flex-wrap gap-2 mt-3">
                                 <span class="bg-red-100 text-red-800 px-2 py-1 rounded text-sm">Laravel</span>
@@ -439,7 +718,8 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12 lg:mb-16 fade-in-up">
                 <h2 class="text-3xl lg:text-4xl font-bold text-white mb-4">Let's Work Together</h2>
-                <p class="text-lg lg:text-xl text-gray-100">Ready to bring your ideas to life? Let's discuss your project!</p>
+                <p class="text-lg lg:text-xl text-gray-100">Ready to bring your ideas to life? Let's discuss your
+                    project!</p>
             </div>
             <div class="max-w-4xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
                 <div class="text-white fade-in-up">
@@ -447,12 +727,12 @@
                     <div class="space-y-4">
                         <div class="flex items-center">
                             <i class="fas fa-envelope mr-4 text-yellow-300"></i>
-                            <span>omkarverma@example.com</span>
+                            <span>omkar3524@gmail.com</span>
                         </div>
-                        <div class="flex items-center">
+                        <!-- <div class="flex items-center">
                             <i class="fas fa-phone mr-4 text-yellow-300"></i>
                             <span>+1 (555) 123-4567</span>
-                        </div>
+                        </div> -->
                         <div class="flex items-center">
                             <i class="fas fa-map-marker-alt mr-4 text-yellow-300"></i>
                             <span>Available Worldwide</span>
@@ -487,7 +767,7 @@
                             <textarea rows="5" placeholder="Your Message"
                                 class="w-full px-4 py-3 bg-white/20 border border-white/30 rounded-lg text-white placeholder-gray-300 focus:outline-none focus:border-yellow-300"></textarea>
                         </div>
-                        <button type="submit"
+                        <button type="button"
                             class="w-full bg-yellow-400 text-gray-900 py-3 rounded-lg font-semibold hover:bg-yellow-300 transition-colors">
                             Send Message
                         </button>
@@ -500,7 +780,7 @@
     <!-- Footer -->
     <footer class="bg-gray-800 text-white py-8">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <p>&copy; 2024 Omkar Verma. Built with ❤️ using Laravel & Tailwind CSS.</p>
+            <p>&copy; 2025 Omkar Verma. Built with ❤️ using Tailwind CSS.</p>
         </div>
     </footer>
 
@@ -607,6 +887,84 @@
             el.style.transform = 'translateY(30px)';
             el.style.transition = 'all 0.8s ease-out';
             observer.observe(el);
+        });
+
+        // Tech logos mouse tracking
+        const heroContainer = document.querySelector('.hero-container');
+        const techLogos = document.querySelectorAll('.tech-logo');
+        let mouseX = 0;
+        let mouseY = 0;
+        let isMouseInHero = false;
+
+        // Dynamic logo positions based on screen size
+        function getLogoPositions() {
+            const width = window.innerWidth;
+            const height = window.innerHeight;
+
+            return [
+                { x: width * 0.1, y: height * 0.2 },
+                { x: width * 0.3, y: height * 0.15 },
+                { x: width * 0.5, y: height * 0.25 },
+                { x: width * 0.7, y: height * 0.18 },
+                { x: width * 0.2, y: height * 0.4 },
+                { x: width * 0.6, y: height * 0.45 },
+                { x: width * 0.8, y: height * 0.35 },
+                { x: width * 0.4, y: height * 0.5 }
+            ];
+        }
+
+        let logoPositions = getLogoPositions();
+
+        // Update positions on window resize
+        window.addEventListener('resize', () => {
+            logoPositions = getLogoPositions();
+        });
+
+        heroContainer.addEventListener('mouseenter', () => {
+            isMouseInHero = true;
+        });
+
+        heroContainer.addEventListener('mouseleave', () => {
+            isMouseInHero = false;
+            techLogos.forEach(logo => {
+                logo.classList.remove('visible');
+            });
+        });
+
+        heroContainer.addEventListener('mousemove', (e) => {
+            if (!isMouseInHero) return;
+
+            const rect = heroContainer.getBoundingClientRect();
+            mouseX = e.clientX - rect.left;
+            mouseY = e.clientY - rect.top;
+
+            techLogos.forEach((logo, index) => {
+                const logoPos = logoPositions[index];
+                const distance = Math.sqrt(
+                    Math.pow(mouseX - logoPos.x, 2) + Math.pow(mouseY - logoPos.y, 2)
+                );
+
+                const radius = window.innerWidth > 768 ? 200 : 150; // Larger radius on desktop
+
+                if (distance < radius) { // Show logos within radius
+                    logo.classList.add('visible');
+
+                    // Calculate position relative to mouse with some offset
+                    const angle = Math.atan2(logoPos.y - mouseY, logoPos.x - mouseX);
+                    const offsetDistance = 60 + (index * 8); // Varying distances
+                    const logoX = mouseX + Math.cos(angle) * offsetDistance;
+                    const logoY = mouseY + Math.sin(angle) * offsetDistance;
+
+                    // Ensure logos stay within bounds
+                    const boundedX = Math.max(20, Math.min(logoX, rect.width - 60));
+                    const boundedY = Math.max(20, Math.min(logoY, rect.height - 60));
+
+                    logo.style.left = boundedX + 'px';
+                    logo.style.top = boundedY + 'px';
+                } else {
+                    logo.classList.remove('visible');
+                }
+            });
         });
     </script>
 </body>
