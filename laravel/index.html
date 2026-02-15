@@ -12,15 +12,22 @@
         body {
             max-width: 1200px;
             margin: 2rem auto;
-            padding: 2rem;
+            padding: 1rem;
             background: #181a1b;
             color: #e2e8f0;
             border-radius: 8px;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
             font-family: 'Segoe UI', 'Helvetica Neue', Arial, 'Liberation Sans', sans-serif;
             display: flex;
-            flex-direction: row;
+            flex-direction: column;
             gap: 2rem;
+        }
+
+        @media (min-width: 768px) {
+            body {
+                flex-direction: row;
+                padding: 2rem;
+            }
         }
 
         h1,
@@ -30,9 +37,17 @@
 
         pre {
             background: #23272e;
-            padding: 1em;
+            padding: 0.8em;
             border-radius: 5px;
             overflow-x: auto;
+            font-size: 0.875rem;
+        }
+
+        @media (min-width: 768px) {
+            pre {
+                padding: 1em;
+                font-size: 1rem;
+            }
         }
 
         code {
@@ -40,6 +55,7 @@
             background: #23272e;
             padding: 2px 4px;
             border-radius: 3px;
+            font-size: 0.875rem;
         }
 
         .note {
@@ -56,50 +72,107 @@
         }
 
         .sidebar {
-            width: 220px;
-            min-width: 180px;
-            max-width: 240px;
+            width: 100%;
             background: #23272e;
             border-radius: 8px;
-            padding: 1.5rem 1rem;
+            padding: 1rem;
             height: fit-content;
-            position: sticky;
-            top: 2rem;
-            align-self: flex-start;
+            position: static;
+        }
+
+        @media (min-width: 768px) {
+            .sidebar {
+                width: 220px;
+                min-width: 180px;
+                max-width: 240px;
+                padding: 1.5rem 1rem;
+                position: sticky;
+                top: 2rem;
+                align-self: flex-start;
+            }
         }
 
         .sidebar h3 {
             color: #38bdf8;
-            font-size: 1.1rem;
-            margin-bottom: 1rem;
+            font-size: 1rem;
+            margin-bottom: 0.8rem;
             letter-spacing: 0.03em;
+        }
+
+        @media (min-width: 768px) {
+            .sidebar h3 {
+                font-size: 1.1rem;
+                margin-bottom: 1rem;
+            }
         }
 
         .sidebar ul {
             list-style: none;
             padding: 0;
             margin: 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .sidebar ul {
+                display: block;
+            }
         }
 
         .sidebar li {
-            margin-bottom: 0.7rem;
+            margin-bottom: 0;
+        }
+
+        @media (min-width: 768px) {
+            .sidebar li {
+                margin-bottom: 0.7rem;
+            }
         }
 
         .sidebar a {
             color: #e2e8f0;
             text-decoration: none;
-            font-size: 1rem;
+            font-size: 0.9rem;
             transition: color 0.2s;
+            padding: 0.5rem;
+            border-radius: 4px;
+            display: block;
         }
 
-        .sidebar a:hover,
-        .sidebar a.active {
-            color: #38bdf8;
+        @media (min-width: 768px) {
+            .sidebar a {
+                font-size: 1rem;
+                padding: 0;
+            }
         }
 
         .content {
             flex: 1 1 0%;
             min-width: 0;
+        }
+
+        h1 {
+            font-size: 1.5rem;
+            line-height: 1.3;
+        }
+
+        @media (min-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+        }
+
+        h2 {
+            font-size: 1.25rem;
+            line-height: 1.3;
+        }
+
+        @media (min-width: 768px) {
+            h2 {
+                font-size: 1.5rem;
+            }
         }
     </style>
 </head>
