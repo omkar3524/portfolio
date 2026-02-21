@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 
 <head>
     <meta charset="UTF-8">
@@ -7,799 +7,335 @@
     <title>Omkar Verma - Laravel Developer Portfolio</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        :root {
+            --bg-deep: #0E0918;
+            --bg-card: rgba(18, 12, 33, 0.43);
+            --accent-purple: #8241F9;
+            --accent-orange: #FF6D5A;
+            --text-primary: #FFFFFF;
+            --text-secondary: #C4BBD3;
+            --border-color: rgba(255, 255, 255, 0.1);
+        }
 
         body {
-            font-family: 'Inter', sans-serif;
-            transition: background-color 0.3s ease, color 0.3s ease;
+            font-family: 'Outfit', 'Inter', sans-serif;
+            background-color: var(--bg-deep);
+            color: var(--text-primary);
+            overflow-x: hidden;
         }
 
-        /* Dark mode styles */
-        .dark {
-            background-color: #0f172a;
-            color: #e2e8f0;
-        }
-
-        .gradient-bg {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        }
-
-        .dark .gradient-bg {
-            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
-        }
-
-        .card-hover {
-            transition: all 0.3s ease;
-        }
-
-        .card-hover:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-        }
-
-        .dark .card-hover:hover {
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-        }
-
-        /* Dark mode navigation */
-        .dark nav {
-            background: rgba(15, 23, 42, 0.9);
-            backdrop-filter: blur(10px);
-        }
-
-        .dark .mobile-menu {
-            background: #1e293b;
-            border-top-color: #475569;
-        }
-
-        .dark .mobile-menu a {
-            color: #e2e8f0;
-            border-bottom-color: #334155;
-        }
-
-        .dark .mobile-menu a:hover {
-            background-color: #334155;
-            color: #fbbf24;
-        }
-
-        /* Dark mode sections */
-        .dark .bg-white {
-            background-color: #1e293b !important;
-        }
-
-        .dark .bg-gray-50 {
-            background-color: #0f172a !important;
-        }
-
-        .dark .text-gray-800 {
-            color: #e2e8f0 !important;
-        }
-
-        .dark .text-gray-600 {
-            color: #94a3b8 !important;
-        }
-
-        .dark .text-gray-700 {
-            color: #cbd5e1 !important;
-        }
-
-        /* Dark mode cards */
-        .dark .bg-gray-50 {
-            background-color: #334155 !important;
-        }
-
-        .dark .shadow-lg {
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.1) !important;
-        }
-
-        /* Dark mode footer */
-        .dark footer {
-            background-color: #020617 !important;
-        }
-
-        /* Dark mode toggle button */
-        .theme-toggle {
-            transition: all 0.3s ease;
-        }
-
-        .theme-toggle:hover {
-            transform: scale(1.1);
-        }
-
-        /* ...existing animations and styles... */
-        .typing-animation {
-            border-right: 2px solid #667eea;
-            animation: blink 1s infinite;
-            min-height: 1.5em;
-            display: inline-block;
-        }
-
-        @keyframes blink {
-            0%,
-            50% {
-                border-color: transparent;
-            }
-
-            51%,
-            100% {
-                border-color: #667eea;
-            }
-        }
-
-        .float-animation {
-            animation: float 6s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0%,
-            100% {
-                transform: translateY(0px);
-            }
-
-            50% {
-                transform: translateY(-20px);
-            }
-        }
-
-        .slide-in-left {
-            animation: slideInLeft 0.8s ease-out;
-        }
-
-        @keyframes slideInLeft {
-            from {
-                opacity: 0;
-                transform: translateX(-50px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        .slide-in-right {
-            animation: slideInRight 0.8s ease-out;
-        }
-
-        @keyframes slideInRight {
-            from {
-                opacity: 0;
-                transform: translateX(50px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        .fade-in-up {
-            animation: fadeInUp 0.8s ease-out;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Mobile menu styles */
-        .mobile-menu {
-            display: none;
-        }
-
-        .mobile-menu.active {
-            display: block;
-        }
-
-        /* Ensure content doesn't hide behind fixed nav */
-        main {
-            scroll-margin-top: 80px;
-        }
-
-        section {
-            scroll-margin-top: 80px;
-        }
-
-        /* Mobile responsiveness */
-        @media (max-width: 768px) {
-            .hero-text {
-                text-align: center;
-            }
-
-            .hero-buttons {
-                flex-direction: column;
-                gap: 1rem;
-            }
-
-            .hero-buttons a {
-                width: 100%;
-                text-align: center;
-            }
-
-            .mobile-menu {
-                position: absolute;
-                top: 100%;
-                left: 0;
-                right: 0;
-                background: white;
-                border-top: 1px solid #e5e7eb;
-                box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-                z-index: 50;
-            }
-
-            .mobile-menu a {
-                display: block;
-                padding: 1rem 1.5rem;
-                border-bottom: 1px solid #f3f4f6;
-                text-decoration: none;
-                color: #374151;
-                transition: background-color 0.2s;
-            }
-
-            .mobile-menu a:hover {
-                background-color: #f9fafb;
-                color: #4f46e5;
-            }
-        }
-
-        /* Hero tech logos */
-        .tech-logo {
-            position: absolute;
-            width: 40px;
-            height: 40px;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            transform: scale(0);
-            transition: all 0.3s ease;
-            pointer-events: none;
-            z-index: 10;
-        }
-
-        .tech-logo i {
-            font-size: 20px;
-            color: white;
-        }
-
-        .tech-logo.visible {
-            opacity: 1;
-            transform: scale(1);
-        }
-
-        .hero-container {
+        .text-lavender { color: var(--text-secondary); }
+        .bg-n8n-card { background: var(--bg-card); backdrop-filter: blur(12px); border: 1px solid var(--border-color); }
+        
+        /* Premium n8n Button */
+        .btn-premium {
             position: relative;
+            background: linear-gradient(135deg, var(--accent-purple), #5E26D1);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             overflow: hidden;
         }
+        .btn-premium::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), rgba(255,255,255,0.2) 0%, transparent 50%);
+            opacity: 0; transition: opacity 0.3s;
+        }
+        .btn-premium:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(130, 65, 249, 0.4); }
+        .btn-premium:hover::after { opacity: 1; }
+
+        /* n8n Card Hover Glow Effect */
+        .card-glow {
+            position: relative;
+            border-radius: 20px;
+            transition: border-color 0.3s ease;
+        }
+        .card-glow::before {
+            content: '';
+            position: absolute;
+            inset: -1px;
+            border-radius: 21px;
+            padding: 1px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1), transparent 50%, rgba(255,255,255,0.05));
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+        }
+        .glow-overlay {
+            position: absolute;
+            inset: 0;
+            border-radius: 20px;
+            background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(130, 65, 249, 0.1) 0%, transparent 60%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .card-glow:hover .glow-overlay { opacity: 1; }
+        .card-glow:hover { border-color: rgba(255, 255, 255, 0.2); }
+
+        /* Animations */
+        @keyframes blob {
+            0% { transform: translate(0px, 0px) scale(1); }
+            33% { transform: translate(30px, -50px) scale(1.1); }
+            66% { transform: translate(-20px, 20px) scale(0.9); }
+            100% { transform: translate(0px, 0px) scale(1); }
+        }
+        .animate-blob { animation: blob 7s infinite alternate; }
+        .animation-delay-2000 { animation-delay: 2s; }
+        .animation-delay-4000 { animation-delay: 4s; }
+
+        .typing-cursor::after {
+            content: '|';
+            animation: blink 1s infinite;
+        }
+        @keyframes blink { 50% { opacity: 0; } }
+
+        /* Navigation Glassmorphism */
+        nav { background: rgba(14, 9, 24, 0.7); backdrop-filter: blur(15px); border-bottom: 1px solid var(--border-color); }
     </style>
 </head>
 
-<body class="bg-gray-50 transition-colors duration-300">
+<body class="selection:bg-purple-500/30">
+    <!-- Background Decor -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none -z-10">
+        <div class="absolute -top-[10%] -left-[10%] w-[40%] h-[40%] bg-purple-600/20 blur-[120px] animate-blob"></div>
+        <div class="absolute top-[20%] -right-[10%] w-[35%] h-[35%] bg-orange-600/10 blur-[120px] animate-blob animation-delay-2000"></div>
+        <div class="absolute -bottom-[10%] left-[20%] w-[30%] h-[30%] bg-indigo-600/15 blur-[120px] animate-blob animation-delay-4000"></div>
+    </div>
+
     <!-- Navigation -->
-    <nav class="fixed w-full bg-white/90 backdrop-blur-sm z-50 shadow-sm transition-colors duration-300">
+    <nav class="fixed w-full z-50 transition-all duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center py-4">
-                <div class="text-xl md:text-2xl font-bold text-gray-800">Omkar Verma</div>
-                <div class="hidden md:flex items-center space-x-8">
-                    <a href="#home" class="text-gray-600 hover:text-indigo-600 transition-colors">Home</a>
-                    <a href="#about" class="text-gray-600 hover:text-indigo-600 transition-colors">About</a>
-                    <a href="#skills" class="text-gray-600 hover:text-indigo-600 transition-colors">Skills</a>
-                    <a href="#projects" class="text-gray-600 hover:text-indigo-600 transition-colors">Projects</a>
-                    <a href="#experience" class="text-gray-600 hover:text-indigo-600 transition-colors">Experience</a>
-                    <a href="#contact" class="text-gray-600 hover:text-indigo-600 transition-colors">Contact</a>
-                    <!-- Dark Mode Toggle -->
-                    <button id="theme-toggle" class="theme-toggle p-2 rounded-lg text-gray-600 hover:text-indigo-600 hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-300">
-                        <i id="theme-toggle-light-icon" class="fas fa-sun text-lg"></i>
-                        <i id="theme-toggle-dark-icon" class="fas fa-moon text-lg hidden"></i>
-                    </button>
+            <div class="flex justify-between items-center py-5">
+                <div class="text-2xl font-bold tracking-tight">
+                    Omkar<span class="text-purple-500">.</span>Verma
                 </div>
-                <div class="md:hidden flex items-center space-x-4">
-                    <!-- Dark Mode Toggle Mobile -->
-                    <button id="theme-toggle-mobile" class="theme-toggle p-2 rounded-lg text-gray-600 hover:text-indigo-600 transition-all duration-300">
-                        <i id="theme-toggle-light-icon-mobile" class="fas fa-sun text-lg"></i>
-                        <i id="theme-toggle-dark-icon-mobile" class="fas fa-moon text-lg hidden"></i>
-                    </button>
-                    <button id="mobile-menu-button" class="text-gray-600 focus:outline-none">
-                        <i class="fas fa-bars text-xl"></i>
-                    </button>
+                <div class="hidden md:flex items-center space-x-10">
+                    <a href="#home" class="text-lavender hover:text-white transition-colors text-sm font-medium">Home</a>
+                    <a href="#about" class="text-lavender hover:text-white transition-colors text-sm font-medium">About</a>
+                    <a href="#skills" class="text-lavender hover:text-white transition-colors text-sm font-medium">Skills</a>
+                    <a href="#projects" class="text-lavender hover:text-white transition-colors text-sm font-medium">Projects</a>
+                    <a href="#contact" class="btn-premium px-5 py-2 rounded-full text-sm font-semibold">Let's Talk</a>
                 </div>
+                <button id="mobile-menu-button" class="md:hidden text-white">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
             </div>
-            <!-- Mobile Menu -->
-            <div id="mobile-menu" class="mobile-menu md:hidden">
-                <a href="#home">Home</a>
-                <a href="#about">About</a>
-                <a href="#skills">Skills</a>
-                <a href="#projects">Projects</a>
-                <a href="#experience">Experience</a>
-                <a href="#contact">Contact</a>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-n8n-card border-t border-white/5">
+            <div class="px-4 py-6 space-y-4">
+                <a href="#home" class="block text-lavender hover:text-white text-lg">Home</a>
+                <a href="#about" class="block text-lavender hover:text-white text-lg">About</a>
+                <a href="#skills" class="block text-lavender hover:text-white text-lg">Skills</a>
+                <a href="#projects" class="block text-lavender hover:text-white text-lg">Projects</a>
+                <a href="#contact" class="block text-purple-400 font-bold text-lg">Contact Me</a>
             </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section id="home" class="min-h-screen gradient-bg flex items-center pt-20 hero-container">
-        <!-- Tech logos -->
-        <div class="tech-logo" id="logo-php">
-            <i class="fab fa-php"></i>
-        </div>
-        <div class="tech-logo" id="logo-js">
-            <i class="fab fa-js"></i>
-        </div>
-        <div class="tech-logo" id="logo-html">
-            <i class="fab fa-html5"></i>
-        </div>
-        <div class="tech-logo" id="logo-css">
-            <i class="fab fa-css3-alt"></i>
-        </div>
-        <div class="tech-logo" id="logo-git">
-            <i class="fab fa-git-alt"></i>
-        </div>
-        <div class="tech-logo" id="logo-docker">
-            <i class="fab fa-docker"></i>
-        </div>
-        <div class="tech-logo" id="logo-aws">
-            <i class="fab fa-aws"></i>
-        </div>
-        <div class="tech-logo" id="logo-node">
-            <i class="fab fa-node-js"></i>
-        </div>
-
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-                <div class="text-white slide-in-left hero-text">
-                    <h1 class="text-3xl sm:text-4xl lg:text-4xl xl:text-5xl font-bold mb-4">
-                        Hi, I'm <span class="text-yellow-300">Omkar Verma</span>
-                    </h1>
-                    <h2 class="text-xl sm:text-2xl lg:text-3xl mb-6 typing-animation" id="typewriter"></h2>
-                    <p class="text-base sm:text-lg lg:text-xl mb-8 text-gray-100">
-                        Passionate Laravel developer with 5+ years of experience building scalable web applications,
-                        integrating payment systems, and creating seamless user experiences.
-                    </p>
-                    <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 hero-buttons">
-                        <a href="#contact"
-                            class="bg-yellow-400 text-gray-900 px-6 lg:px-8 py-3 rounded-lg font-semibold hover:bg-yellow-300 transition-colors text-center">
-                            Get In Touch
-                        </a>
-                        <a href="#projects"
-                            class="border-2 border-white text-white px-6 lg:px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-gray-900 transition-colors text-center">
-                            View Projects
-                        </a>
-                    </div>
+    <section id="home" class="relative pt-32 pb-20 md:pt-48 md:pb-32 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+            <div class="text-center max-w-4xl mx-auto">
+                <div class="inline-flex items-center space-x-2 bg-white/5 border border-white/10 px-4 py-1.5 rounded-full mb-8 animate-fade-in">
+                    <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                    <span class="text-xs font-semibold tracking-wider uppercase text-lavender">Available for new opportunities</span>
                 </div>
-                <div class="slide-in-right">
-                    <div class="relative">
-                        <div class="w-60 h-60 sm:w-72 sm:h-72 lg:w-80 lg:h-80 mx-auto bg-white/10 rounded-full flex items-center justify-center float-animation">
-                            <i class="fab fa-laravel text-6xl sm:text-7xl lg:text-8xl text-red-500"></i>
-                        </div>
-                        <!-- Vue.js - Top Right -->
-                        <div class="absolute top-8 right-8 w-16 h-16 bg-yellow-400 rounded-full flex items-center justify-center">
-                            <i class="fab fa-vuejs text-2xl text-green-600"></i>
-                        </div>
-                        <!-- AWS - Right Center -->
-                        <div class="absolute top-1/2 right-2 w-16 h-16 bg-orange-400 rounded-full flex items-center justify-center transform -translate-y-1/2">
-                            <i class="fab fa-aws text-2xl text-white"></i>
-                        </div>
-                        <!-- Docker - Bottom Right -->
-                        <div class="absolute bottom-8 right-8 w-16 h-16 bg-green-500 rounded-full flex items-center justify-center">
-                            <i class="fab fa-docker text-2xl text-white"></i>
-                        </div>
-                        <!-- Auth0 - Top Left -->
-                        <div class="absolute top-8 left-8 w-16 h-16 bg-orange-500 rounded-full flex items-center justify-center">
-                            <i class="fas fa-shield-alt text-2xl text-white"></i>
-                        </div>
-                        <!-- PayPal - Left Center -->
-                        <div class="absolute top-1/2 left-2 w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center transform -translate-y-1/2">
-                            <i class="fab fa-paypal text-2xl text-white"></i>
-                        </div>
-                        <!-- Stripe - Bottom Left -->
-                        <div class="absolute bottom-8 left-8 w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center">
-                            <i class="fab fa-stripe text-2xl text-white"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="py-16 lg:py-20 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12 lg:mb-16 fade-in-up">
-                <h2 class="text-3xl lg:text-4xl font-bold text-gray-800 mb-4">About Me</h2>
-                <p class="text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto">
-                    A dedicated Laravel developer who loves crafting elegant solutions to complex problems
+                <h1 class="text-5xl md:text-7xl font-bold leading-tight mb-6">
+                    Building the future with <br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-orange-400">Laravel & Modern Tech</span>
+                </h1>
+                <p class="text-xl md:text-2xl text-lavender mb-10 max-w-2xl mx-auto font-light leading-relaxed">
+                    Senior Laravel Developer specializing in high-scale architectures, payment systems, and seamless user experiences.
                 </p>
-            </div>
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-                <div class="fade-in-up">
-                    <h3 class="text-2xl font-bold text-gray-800 mb-6">My Journey</h3>
-                    <p class="text-gray-600 mb-4">
-                        Over the past 5 years, I've been immersed in the Laravel ecosystem, building everything from
-                        simple web applications to complex enterprise solutions. My expertise spans across the entire
-                        development stack, with a particular passion for backend architecture and API development.
-                    </p>
-                    <p class="text-gray-600 mb-6">
-                        I believe in writing clean, maintainable code and following best practices. My experience with
-                        payment integrations and third-party services has given me insights into building secure and
-                        reliable applications that handle sensitive data and complex business logic.
-                    </p>
-                    <div class="flex space-x-4">
-                        <a href="https://github.com/omkar3524" target="_blank" class="text-indigo-600 hover:text-indigo-800 text-2xl">
-                            <i class="fab fa-github"></i>
-                        </a>
-                        <a href="https://in.linkedin.com/in/omkar-verma-a228b113b" target="_blank" class="text-indigo-600 hover:text-indigo-800 text-2xl">
-                            <i class="fab fa-linkedin"></i>
-                        </a>
-                        <a href="https://x.com/Omkar3524" target="_blank" class="text-indigo-600 hover:text-indigo-800 text-2xl">
-                            <i class="fab fa-twitter"></i>
-                        </a>
-                    </div>
+                <div class="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-6">
+                    <a href="#projects" class="btn-premium px-10 py-4 rounded-full text-lg font-bold w-full sm:w-auto">
+                        Explore Work
+                    </a>
+                    <a href="#contact" class="bg-white/5 hover:bg-white/10 border border-white/10 px-10 py-4 rounded-full text-lg font-bold transition-all w-full sm:w-auto">
+                        Contact Me
+                    </a>
                 </div>
-                <div class="fade-in-up">
-                    <div class="bg-gradient-to-r from-indigo-500 to-purple-600 p-8 rounded-2xl text-white">
-                        <h4 class="text-xl font-bold mb-4">Quick Facts</h4>
-                        <div class="space-y-3">
-                            <div class="flex items-center">
-                                <i class="fas fa-calendar-alt mr-3"></i>
-                                <span>5+ Years Experience</span>
-                            </div>
-                            <div class="flex items-center">
-                                <i class="fas fa-code mr-3"></i>
-                                <span>5+ Projects</span>
-                            </div>
-                            <div class="flex items-center">
-                                <i class="fas fa-users mr-3"></i>
-                                <span>Happy Clients</span>
-                            </div>
-                            <div class="flex items-center">
-                                <i class="fas fa-coffee mr-3"></i>
-                                <span>∞ Cups of Coffee</span>
-                            </div>
-                        </div>
-                    </div>
+                
+                <!-- Floating Icons Decor -->
+                <div class="mt-20 flex flex-wrap justify-center gap-12 opacity-40 grayscale hover:grayscale-0 transition-all duration-700">
+                    <i class="fab fa-laravel text-4xl hover:text-red-500"></i>
+                    <i class="fab fa-vuejs text-4xl hover:text-green-500"></i>
+                    <i class="fab fa-aws text-4xl hover:text-orange-400"></i>
+                    <i class="fab fa-docker text-4xl hover:text-blue-500"></i>
+                    <i class="fab fa-js text-4xl hover:text-yellow-400"></i>
+                    <i class="fab fa-php text-4xl hover:text-indigo-400"></i>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Skills Section -->
-    <section id="skills" class="py-16 lg:py-20 bg-gray-50">
+    <!-- Skills Section (Integration Style) -->
+    <section id="skills" class="py-24 relative">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12 lg:mb-16 fade-in-up">
-                <h2 class="text-3xl lg:text-4xl font-bold text-gray-800 mb-4">Technical Skills</h2>
-                <p class="text-lg lg:text-xl text-gray-600">Technologies I work with on a daily basis</p>
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Core Ecosystem</h2>
+                <p class="text-lavender max-w-xl mx-auto">Expertise built over 5+ years of professional development and continuous learning.</p>
             </div>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 gap-6 lg:gap-8">
-                <!-- Laravel -->
-                <div class="bg-white p-6 rounded-xl shadow-lg card-hover text-center fade-in-up">
-                    <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i class="fab fa-laravel text-2xl text-red-600"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Laravel</h3>
-                    <p class="text-gray-600 text-sm">Expert level with 5+ years experience</p>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+                <!-- Skill Card -->
+                <div class="bg-n8n-card p-6 rounded-2xl flex flex-col items-center justify-center space-y-3 card-glow transition-transform hover:-translate-y-1">
+                    <div class="glow-overlay"></div>
+                    <i class="fab fa-laravel text-3xl text-red-500 z-10"></i>
+                    <span class="text-sm font-semibold z-10">Laravel</span>
                 </div>
-
-                <!-- MySQL -->
-                <div class="bg-white p-6 rounded-xl shadow-lg card-hover text-center fade-in-up">
-                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i class="fas fa-database text-2xl text-blue-600"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold text-gray-800 mb-2">MySQL</h3>
-                    <p class="text-gray-600 text-sm">Database design & optimization</p>
+                <div class="bg-n8n-card p-6 rounded-2xl flex flex-col items-center justify-center space-y-3 card-glow transition-transform hover:-translate-y-1">
+                    <div class="glow-overlay"></div>
+                    <i class="fas fa-database text-3xl text-blue-400 z-10"></i>
+                    <span class="text-sm font-semibold z-10">MySQL</span>
                 </div>
-
-                <!-- Vue.js -->
-                <div class="bg-white p-6 rounded-xl shadow-lg card-hover text-center fade-in-up">
-                    <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i class="fab fa-vuejs text-2xl text-green-600"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Vue.js</h3>
-                    <p class="text-gray-600 text-sm">Modern frontend development</p>
+                <div class="bg-n8n-card p-6 rounded-2xl flex flex-col items-center justify-center space-y-3 card-glow transition-transform hover:-translate-y-1">
+                    <div class="glow-overlay"></div>
+                    <i class="fab fa-vuejs text-3xl text-green-500 z-10"></i>
+                    <span class="text-sm font-semibold z-10">Vue.js</span>
                 </div>
-
-                <!-- Livewire -->
-                <div class="bg-white p-6 rounded-xl shadow-lg card-hover text-center fade-in-up">
-                    <div class="w-16 h-16 bg-pink-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i class="fas fa-bolt text-2xl text-pink-600"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Livewire</h3>
-                    <p class="text-gray-600 text-sm">Dynamic Laravel components</p>
+                <div class="bg-n8n-card p-6 rounded-2xl flex flex-col items-center justify-center space-y-3 card-glow transition-transform hover:-translate-y-1">
+                    <div class="glow-overlay"></div>
+                    <i class="fab fa-stripe text-3xl text-indigo-400 z-10"></i>
+                    <span class="text-sm font-semibold z-10">Stripe</span>
                 </div>
-
-                <!-- Tailwind CSS -->
-                <div class="bg-white p-6 rounded-xl shadow-lg card-hover text-center fade-in-up">
-                    <div class="w-16 h-16 bg-cyan-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i class="fas fa-wind text-2xl text-cyan-600"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Tailwind CSS</h3>
-                    <p class="text-gray-600 text-sm">Utility-first CSS framework</p>
+                <div class="bg-n8n-card p-6 rounded-2xl flex flex-col items-center justify-center space-y-3 card-glow transition-transform hover:-translate-y-1">
+                    <div class="glow-overlay"></div>
+                    <i class="fab fa-aws text-3xl text-orange-400 z-10"></i>
+                    <span class="text-sm font-semibold z-10">AWS</span>
                 </div>
-
-                <!-- Alpine.js -->
-                <div class="bg-white p-6 rounded-xl shadow-lg card-hover text-center fade-in-up">
-                    <div class="w-16 h-16 bg-teal-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i class="fas fa-mountain text-2xl text-teal-600"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Alpine.js</h3>
-                    <p class="text-gray-600 text-sm">Lightweight JavaScript framework</p>
-                </div>
-
-                <!-- Redis -->
-                <div class="bg-white p-6 rounded-xl shadow-lg card-hover text-center fade-in-up">
-                    <div class="w-16 h-16 bg-red-50 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i class="fas fa-memory text-2xl text-red-500"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Redis</h3>
-                    <p class="text-gray-600 text-sm">In-memory data structure store</p>
-                </div>
-
-                <!-- OAuth & SSO -->
-                <div class="bg-white p-6 rounded-xl shadow-lg card-hover text-center fade-in-up">
-                    <div class="w-16 h-16 bg-green-50 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i class="fas fa-shield-alt text-2xl text-green-600"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold text-gray-800 mb-2">OAuth & SSO</h3>
-                    <p class="text-gray-600 text-sm">Google, Facebook authentication</p>
-                </div>
-            </div>
-
-            <!-- Additional Skills -->
-            <div class="mt-12 lg:mt-16 fade-in-up">
-                <h3 class="text-xl lg:text-2xl font-bold text-gray-800 text-center mb-6 lg:mb-8">Additional Expertise</h3>
-                <div class="flex flex-wrap justify-center gap-6 lg:gap-8">
-                    <div class="flex flex-col items-center group">
-                        <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-purple-600 rounded-full flex items-center justify-center text-white hover:from-purple-600 hover:to-purple-700 transition-all duration-300 transform hover:scale-110 shadow-lg hover:shadow-xl">
-                            <i class="fab fa-stripe text-xl"></i>
-                        </div>
-                        <span class="text-sm font-medium text-gray-700 mt-2 group-hover:text-purple-600 transition-colors">Stripe</span>
-                    </div>
-
-                    <div class="flex flex-col items-center group">
-                        <div class="w-16 h-16 bg-gradient-to-br from-indigo-500 to-indigo-600 rounded-full flex items-center justify-center text-white hover:from-indigo-600 hover:to-indigo-700 transition-all duration-300 transform hover:scale-110 shadow-lg hover:shadow-xl">
-                            <i class="fab fa-php text-xl"></i>
-                        </div>
-                        <span class="text-sm font-medium text-gray-700 mt-2 group-hover:text-indigo-600 transition-colors">PHP</span>
-                    </div>
-
-                    <div class="flex flex-col items-center group">
-                        <div class="w-16 h-16 bg-gradient-to-br from-yellow-500 to-yellow-600 rounded-full flex items-center justify-center text-white hover:from-yellow-600 hover:to-yellow-700 transition-all duration-300 transform hover:scale-110 shadow-lg hover:shadow-xl">
-                            <i class="fab fa-js text-xl"></i>
-                        </div>
-                        <span class="text-sm font-medium text-gray-700 mt-2 group-hover:text-yellow-600 transition-colors">JavaScript</span>
-                    </div>
-
-                    <div class="flex flex-col items-center group">
-                        <div class="w-16 h-16 bg-gradient-to-br from-orange-500 to-orange-600 rounded-full flex items-center justify-center text-white hover:from-orange-600 hover:to-orange-700 transition-all duration-300 transform hover:scale-110 shadow-lg hover:shadow-xl">
-                            <i class="fab fa-git-alt text-xl"></i>
-                        </div>
-                        <span class="text-sm font-medium text-gray-700 mt-2 group-hover:text-orange-600 transition-colors">Git</span>
-                    </div>
-
-                    <div class="flex flex-col items-center group">
-                        <div class="w-16 h-16 bg-gradient-to-br from-orange-400 to-orange-500 rounded-full flex items-center justify-center text-white hover:from-orange-500 hover:to-orange-600 transition-all duration-300 transform hover:scale-110 shadow-lg hover:shadow-xl">
-                            <i class="fab fa-aws text-xl"></i>
-                        </div>
-                        <span class="text-sm font-medium text-gray-700 mt-2 group-hover:text-orange-500 transition-colors">AWS</span>
-                    </div>
-
-                    <div class="flex flex-col items-center group">
-                        <div class="w-16 h-16 bg-gradient-to-br from-gray-500 to-gray-600 rounded-full flex items-center justify-center text-white hover:from-gray-600 hover:to-gray-700 transition-all duration-300 transform hover:scale-110 shadow-lg hover:shadow-xl">
-                            <i class="fas fa-cogs text-xl"></i>
-                        </div>
-                        <span class="text-sm font-medium text-gray-700 mt-2 group-hover:text-gray-600 transition-colors">REST APIs</span>
-                    </div>
+                <div class="bg-n8n-card p-6 rounded-2xl flex flex-col items-center justify-center space-y-3 card-glow transition-transform hover:-translate-y-1">
+                    <div class="glow-overlay"></div>
+                    <i class="fab fa-docker text-3xl text-blue-500 z-10"></i>
+                    <span class="text-sm font-semibold z-10">Docker</span>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Projects Section -->
-    <section id="projects" class="py-16 lg:py-20 bg-white">
+    <section id="projects" class="py-24 bg-white/[0.02]">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12 lg:mb-16 fade-in-up">
-                <h2 class="text-3xl lg:text-4xl font-bold text-gray-800 mb-4">Featured Projects</h2>
-                <p class="text-lg lg:text-xl text-gray-600">A showcase of applications I've built and contributed to
-                </p>
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+                <div class="max-w-2xl">
+                    <h2 class="text-4xl md:text-5xl font-bold mb-4">Featured Applications</h2>
+                    <p class="text-lavender text-lg">A selection of projects that demonstrate my ability to solve complex problems and deliver high-quality code.</p>
+                </div>
+                <a href="https://github.com/omkar3524" class="text-purple-400 hover:text-purple-300 font-semibold flex items-center transition-colors">
+                    All Projects <i class="fas fa-arrow-right ml-2 text-sm"></i>
+                </a>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Project 1 - Dynamhex -->
-                <div class="bg-gray-50 rounded-xl overflow-hidden shadow-lg card-hover fade-in-up">
-                    <div class="h-48 bg-gray-200 overflow-hidden">
-                        <img src="images/Dynmhx.png" alt="Dynamhex" class="w-full h-full object-cover">
+                <!-- Project Card 1 -->
+                <div class="bg-n8n-card rounded-[24px] overflow-hidden card-glow group">
+                    <div class="glow-overlay"></div>
+                    <div class="h-56 bg-gradient-to-br from-purple-900/40 to-black overflow-hidden relative">
+                        <img src="images/Dynmhx.png" alt="Dynamhex" class="w-full h-full object-cover opacity-60 group-hover:scale-110 transition-transform duration-700">
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#0E0918] to-transparent"></div>
                     </div>
-                    <div class="p-6">
-                        <div class="flex items-center justify-between mb-4">
-                            <h3 class="text-xl font-bold text-gray-800">Dynamhex</h3>
-                            <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
-                                <i class="fas fa-leaf text-2xl text-green-600"></i>
-                            </div>
+                    <div class="p-8 relative z-10">
+                        <h3 class="text-2xl font-bold mb-3">Dynamhex</h3>
+                        <p class="text-lavender mb-6 line-clamp-3">Visualizing complex energy consumption data to fight climate change. Integrated multiple data sources into a cohesive dashboard.</p>
+                        <div class="flex items-center space-x-4">
+                            <a href="https://dynmhx.io" class="text-sm font-bold text-white hover:text-purple-400 flex items-center transition-colors">
+                                Case Study <i class="fas fa-chevron-right ml-2 text-xs"></i>
+                            </a>
                         </div>
-                        <p class="text-gray-600 mb-4">
-                            Monitors and visualizes complex energy consumption data for individual, corporate and government entities. Let's fight against climate change.
-                        </p>
-                        <a href="https://dynmhx.io" target="_blank" 
-                           class="inline-flex items-center text-indigo-600 hover:text-indigo-800 font-medium">
-                            Visit Site
-                            <i class="fas fa-external-link-alt ml-2 text-sm"></i>
-                        </a>
                     </div>
                 </div>
 
-                <!-- Project 2 - RoofTop Measurements -->
-                <div class="bg-gray-50 rounded-xl overflow-hidden shadow-lg card-hover fade-in-up">
-                    <div class="h-48 bg-gray-200 overflow-hidden">
-                        <img src="images/rooftopmeasurements.png" alt="RoofTop Measurements" class="w-full h-full object-cover">
+                <!-- Project Card 2 -->
+                <div class="bg-n8n-card rounded-[24px] overflow-hidden card-glow group">
+                    <div class="glow-overlay"></div>
+                    <div class="h-56 bg-gradient-to-br from-blue-900/40 to-black overflow-hidden relative">
+                        <img src="images/rooftopmeasurements.png" alt="RoofTop Measurements" class="w-full h-full object-cover opacity-60 group-hover:scale-110 transition-transform duration-700">
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#0E0918] to-transparent"></div>
                     </div>
-                    <div class="p-6">
-                        <div class="flex items-center justify-between mb-4">
-                            <h3 class="text-xl font-bold text-gray-800">RoofTop Measurements</h3>
-                            <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
-                                <i class="fas fa-home text-2xl text-blue-600"></i>
-                            </div>
+                    <div class="p-8 relative z-10">
+                        <h3 class="text-2xl font-bold mb-3">RoofTop Measurements</h3>
+                        <p class="text-lavender mb-6 line-clamp-3">Professional measurement services for contractors across the USA. High-precision reports delivered within 24 hours.</p>
+                        <div class="flex items-center space-x-4">
+                            <a href="https://www.rooftopmeasurements.com" class="text-sm font-bold text-white hover:text-blue-400 flex items-center transition-colors">
+                                Case Study <i class="fas fa-chevron-right ml-2 text-xs"></i>
+                            </a>
                         </div>
-                        <p class="text-gray-600 mb-4">
-                            Provides comprehensive reports on roof top measurements USA within 1 business day. Professional measurement services for contractors and homeowners.
-                        </p>
-                        <a href="https://www.rooftopmeasurements.com" target="_blank" 
-                           class="inline-flex items-center text-indigo-600 hover:text-indigo-800 font-medium">
-                            Visit Site
-                            <i class="fas fa-external-link-alt ml-2 text-sm"></i>
-                        </a>
                     </div>
                 </div>
 
-                <!-- Project 3 - Standard Backing -->
-                <div class="bg-gray-50 rounded-xl overflow-hidden shadow-lg card-hover fade-in-up">
-                    <div class="h-48 bg-gray-200 overflow-hidden">
-                        <img src="images/standardbacking.png" alt="Standard Backing" class="w-full h-full object-cover">
+                <!-- Project Card 3 -->
+                <div class="bg-n8n-card rounded-[24px] overflow-hidden card-glow group">
+                    <div class="glow-overlay"></div>
+                    <div class="h-56 bg-gradient-to-br from-orange-900/40 to-black overflow-hidden relative">
+                        <img src="images/simpletrics.jpg" alt="Simpletrics" class="w-full h-full object-cover opacity-60 group-hover:scale-110 transition-transform duration-700">
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#0E0918] to-transparent"></div>
                     </div>
-                    <div class="p-6">
-                        <div class="flex items-center justify-between mb-4">
-                            <h3 class="text-xl font-bold text-gray-800">Standard Backing</h3>
-                            <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center">
-                                <i class="fas fa-coins text-2xl text-purple-600"></i>
-                            </div>
+                    <div class="p-8 relative z-10">
+                        <h3 class="text-2xl font-bold mb-3">Simpletrics</h3>
+                        <p class="text-lavender mb-6 line-clamp-3">Full suite of Amazon seller tools including analytics, inventory management, and profit estimation for e-commerce.</p>
+                        <div class="flex items-center space-x-4">
+                            <a href="https://simpletrics.com" class="text-sm font-bold text-white hover:text-orange-400 flex items-center transition-colors">
+                                Case Study <i class="fas fa-chevron-right ml-2 text-xs"></i>
+                            </a>
                         </div>
-                        <p class="text-gray-600 mb-4">
-                            A poker staking company that offers advanced poker training, cashouts, and unlimited bankroll to take your game further.
-                        </p>
-                        <a href="https://standardbacking.com" target="_blank" 
-                           class="inline-flex items-center text-indigo-600 hover:text-indigo-800 font-medium">
-                            Visit Site
-                            <i class="fas fa-external-link-alt ml-2 text-sm"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Project 4 - Simpletrics -->
-                <div class="bg-gray-50 rounded-xl overflow-hidden shadow-lg card-hover fade-in-up">
-                    <div class="h-48 bg-gray-200 overflow-hidden">
-                        <img src="images/simpletrics.jpg" alt="Simpletrics" class="w-full h-full object-cover">
-                    </div>
-                    <div class="p-6">
-                        <div class="flex items-center justify-between mb-4">
-                            <h3 class="text-xl font-bold text-gray-800">Simpletrics</h3>
-                            <div class="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center">
-                                <i class="fas fa-chart-bar text-2xl text-orange-600"></i>
-                            </div>
-                        </div>
-                        <p class="text-gray-600 mb-4">
-                            Amazon seller's software suite including analytics, accounting, profit estimation, and inventory management tools for e-commerce businesses.
-                        </p>
-                        <a href="https://simpletrics.com" target="_blank" 
-                           class="inline-flex items-center text-indigo-600 hover:text-indigo-800 font-medium">
-                            Visit Site
-                            <i class="fas fa-external-link-alt ml-2 text-sm"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Project 5 - ShowMe Caribbean -->
-                <div class="bg-gray-50 rounded-xl overflow-hidden shadow-lg card-hover fade-in-up">
-                    <div class="h-48 bg-gray-200 overflow-hidden">
-                        <img src="images/showmecarribean.png" alt="ShowMe Caribbean" class="w-full h-full object-cover">
-                    </div>
-                    <div class="p-6">
-                        <div class="flex items-center justify-between mb-4">
-                            <h3 class="text-xl font-bold text-gray-800">ShowMe Caribbean</h3>
-                            <div class="w-12 h-12 bg-pink-100 rounded-full flex items-center justify-center">
-                                <i class="fas fa-vr-cardboard text-2xl text-pink-600"></i>
-                            </div>
-                        </div>
-                        <p class="text-gray-600 mb-4">
-                            A small and passionate team dedicated to virtual reality tools. Working with immersive technology to help customers stand out in the digital crowd.
-                        </p>
-                        <a href="https://showmecaribbean.com" target="_blank" 
-                           class="inline-flex items-center text-indigo-600 hover:text-indigo-800 font-medium">
-                            Visit Site
-                            <i class="fas fa-external-link-alt ml-2 text-sm"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- More Projects Card -->
-                <div class="bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl overflow-hidden shadow-lg card-hover fade-in-up">
-                    <div class="p-6 text-white">
-                        <div class="flex items-center justify-between mb-4">
-                            <h3 class="text-xl font-bold">More Projects</h3>
-                            <div class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center">
-                                <i class="fas fa-plus text-2xl text-white"></i>
-                            </div>
-                        </div>
-                        <p class="text-white/90 mb-6">
-                            Interested in seeing more of my work? Check out my GitHub profile for additional projects and open source contributions.
-                        </p>
-                        <a href="#contact" 
-                           class="inline-flex items-center bg-white text-indigo-600 px-4 py-2 rounded-lg font-medium hover:bg-gray-100 transition-colors">
-                            Get In Touch
-                            <i class="fas fa-arrow-right ml-2 text-sm"></i>
-                        </a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Experience Section -->
-    <section id="experience" class="py-16 lg:py-20 bg-white">
+    <!-- Experience Timeline -->
+    <section id="about" class="py-24">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12 lg:mb-16 fade-in-up">
-                <h2 class="text-3xl lg:text-4xl font-bold text-gray-800 mb-4">Experience</h2>
-                <p class="text-lg lg:text-xl text-gray-600">My professional journey as a Laravel developer</p>
-            </div>
-            <div class="max-w-4xl mx-auto">
-                <div class="relative">
-                    <div class="absolute left-4 top-0 bottom-0 w-0.5 bg-indigo-300"></div>
-
-                    <div class="relative pl-12 pb-12 fade-in-up">
-                        <div class="absolute left-0 w-8 h-8 bg-indigo-600 rounded-full flex items-center justify-center">
-                            <i class="fas fa-briefcase text-white text-sm"></i>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-start">
+                <div>
+                    <h2 class="text-4xl md:text-5xl font-bold mb-8">My Journey</h2>
+                    <p class="text-lavender text-lg mb-8 leading-relaxed">
+                        I've spent the last 5+ years dedicated to the Laravel ecosystem, helping companies scale their operations through robust backend systems and intuitive frontends.
+                    </p>
+                    <div class="space-y-8">
+                        <div class="flex space-x-6 relative pb-8 border-l border-white/10 pl-6">
+                            <div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-purple-500 shadow-[0_0_10px_rgba(130,65,249,0.5)]"></div>
+                            <div>
+                                <h4 class="text-xl font-bold">Senior Laravel Developer</h4>
+                                <p class="text-purple-400 font-semibold mb-2">2020 - Present</p>
+                                <p class="text-lavender">Leading development of enterprise apps, mentoring teams, and architecting complex payment flows.</p>
+                            </div>
                         </div>
-                        <div class="bg-gray-50 p-6 rounded-lg">
-                            <h3 class="text-xl font-bold text-gray-800">Senior Laravel Developer</h3>
-                            <p class="text-indigo-600 font-medium">2020 - Present</p>
-                            <p class="text-gray-600 mt-2">
-                                Leading development of complex web applications, implementing payment systems with Stripe,
-                                and mentoring junior developers.
-                            </p>
-                            <div class="flex flex-wrap gap-2 mt-3">
-                                <span class="bg-red-100 text-red-800 px-2 py-1 rounded text-sm">Laravel</span>
-                                <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-sm">MySQL</span>
-                                <span class="bg-purple-100 text-purple-800 px-2 py-1 rounded text-sm">Stripe</span>
-                                <span class="bg-green-100 text-green-800 px-2 py-1 rounded text-sm">Vue.js</span>
+                        <div class="flex space-x-6 relative pb-8 border-l border-white/10 pl-6">
+                            <div class="absolute -left-[5px] top-0 w-2.5 h-2.5 rounded-full bg-white/20"></div>
+                            <div>
+                                <h4 class="text-xl font-bold">Full Stack Developer</h4>
+                                <p class="text-lavender font-semibold mb-2">2019 - 2020</p>
+                                <p class="text-lavender/60">Delivered high-performance web applications using Vue.js and Laravel.</p>
                             </div>
                         </div>
                     </div>
-
-                    <div class="relative pl-12 pb-12 fade-in-up">
-                        <div class="absolute left-0 w-8 h-8 bg-indigo-600 rounded-full flex items-center justify-center">
-                            <i class="fas fa-code text-white text-sm"></i>
-                        </div>
-                        <div class="bg-gray-50 p-6 rounded-lg">
-                            <h3 class="text-xl font-bold text-gray-800">Full Stack Developer</h3>
-                            <p class="text-indigo-600 font-medium">2019 - 2020</p>
-                            <p class="text-gray-600 mt-2">
-                                Developed and maintained multiple Laravel applications, integrated third-party APIs,
-                                and improved application performance. Worked with Vue.js for frontend development.
-                            </p>
-                            <div class="flex flex-wrap gap-2 mt-3">
-                                <span class="bg-red-100 text-red-800 px-2 py-1 rounded text-sm">Laravel</span>
-                                <span class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded text-sm">JavaScript</span>
-                            </div>
-                        </div>
+                </div>
+                
+                <div class="grid grid-cols-2 gap-6">
+                    <div class="bg-n8n-card p-8 rounded-3xl text-center">
+                        <div class="text-4xl font-bold text-white mb-2">5+</div>
+                        <div class="text-lavender text-sm uppercase tracking-widest">Years Experience</div>
+                    </div>
+                    <div class="bg-n8n-card p-8 rounded-3xl text-center">
+                        <div class="text-4xl font-bold text-white mb-2">20+</div>
+                        <div class="text-lavender text-sm uppercase tracking-widest">Key Projects</div>
+                    </div>
+                    <div class="bg-n8n-card p-8 rounded-3xl text-center">
+                        <div class="text-4xl font-bold text-white mb-2">100%</div>
+                        <div class="text-lavender text-sm uppercase tracking-widest">Client Satisfaction</div>
+                    </div>
+                    <div class="bg-n8n-card p-8 rounded-3xl text-center">
+                        <div class="text-4xl font-bold text-white mb-2">∞</div>
+                        <div class="text-lavender text-sm uppercase tracking-widest">Coffee Cups</div>
                     </div>
                 </div>
             </div>
@@ -807,292 +343,86 @@
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="py-16 lg:py-20 gradient-bg">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12 lg:mb-16 fade-in-up">
-                <h2 class="text-3xl lg:text-4xl font-bold text-white mb-4">Let's Work Together</h2>
-                <p class="text-lg lg:text-xl text-gray-100">Ready to bring your ideas to life? Let's discuss your
-                    project!</p>
-            </div>
-            <div class="max-w-4xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
-                <div class="text-white fade-in-up">
-                    <h3 class="text-2xl font-bold mb-6">Get In Touch</h3>
-                    <div class="space-y-4">
-                        <div class="flex items-center">
-                            <i class="fas fa-envelope mr-4 text-yellow-300"></i>
-                            <a href="mailto:omkar3524@gmail.com">omkar3524@gmail.com</a>
-                        </div>
-                        <!-- <div class="flex items-center">
-                            <i class="fas fa-phone mr-4 text-yellow-300"></i>
-                            <span>+1 (555) 123-4567</span>
-                        </div> -->
-                        <div class="flex items-center">
-                            <i class="fas fa-map-marker-alt mr-4 text-yellow-300"></i>
-                            <span>Available Worldwide</span>
-                        </div>
+    <section id="contact" class="py-24 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="bg-gradient-to-br from-purple-900/20 to-orange-900/20 border border-white/10 rounded-[40px] p-8 md:p-16 text-center">
+                <h2 class="text-4xl md:text-6xl font-bold mb-6">Let's create something <br> remarkable together</h2>
+                <p class="text-xl text-lavender mb-12 max-w-2xl mx-auto">Currently accepting new projects and consulting opportunities.</p>
+                
+                <div class="flex flex-col md:flex-row justify-center items-center gap-6">
+                    <a href="mailto:omkar3524@gmail.com" class="btn-premium px-12 py-5 rounded-full text-xl font-bold flex items-center justify-center w-full md:w-auto">
+                        <i class="fas fa-envelope mr-3"></i> omkar3524@gmail.com
+                    </a>
+                    <div class="flex items-center space-x-6">
+                        <a href="https://github.com/omkar3524" class="text-lavender hover:text-white text-3xl transition-colors"><i class="fab fa-github"></i></a>
+                        <a href="https://in.linkedin.com/in/omkar-verma-a228b113b" class="text-lavender hover:text-white text-3xl transition-colors"><i class="fab fa-linkedin"></i></a>
                     </div>
-                    <div class="mt-8">
-                        <h4 class="text-lg font-semibold mb-4">Follow Me</h4>
-                        <div class="flex space-x-4">
-                            <a href="https://github.com/omkar3524" target="_blank" class="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center hover:bg-white/30 transition-colors">
-                                <i class="fab fa-github"></i>
-                            </a>
-                            <a href="https://in.linkedin.com/in/omkar-verma-a228b113b" target="_blank" class="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center hover:bg-white/30 transition-colors">
-                                <i class="fab fa-linkedin"></i>
-                            </a>
-                            <a href="https://x.com/Omkar3524" target="_blank" class="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center hover:bg-white/30 transition-colors">
-                                <i class="fab fa-twitter"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="fade-in-up">
-                    <form class="bg-white/10 backdrop-blur-sm p-8 rounded-2xl">
-                        <div class="mb-6">
-                            <input type="text" placeholder="Your Name"
-                                class="w-full px-4 py-3 bg-white/20 border border-white/30 rounded-lg text-white placeholder-gray-300 focus:outline-none focus:border-yellow-300">
-                        </div>
-                        <div class="mb-6">
-                            <input type="email" placeholder="Your Email"
-                                class="w-full px-4 py-3 bg-white/20 border border-white/30 rounded-lg text-white placeholder-gray-300 focus:outline-none focus:border-yellow-300">
-                        </div>
-                        <div class="mb-6">
-                            <textarea rows="5" placeholder="Your Message"
-                                class="w-full px-4 py-3 bg-white/20 border border-white/30 rounded-lg text-white placeholder-gray-300 focus:outline-none focus:border-yellow-300"></textarea>
-                        </div>
-                        <button type="button"
-                            class="w-full bg-yellow-400 text-gray-900 py-3 rounded-lg font-semibold hover:bg-yellow-300 transition-colors">
-                            Send Message
-                        </button>
-                    </form>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="bg-gray-800 text-white py-8">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <p>&copy; 2025 Omkar Verma. Built with ❤️ using Tailwind CSS.</p>
+    <footer class="py-12 border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="text-lavender text-sm">
+                &copy; 2025 Omkar Verma. Build with Passion.
+            </div>
+            <div class="flex space-x-8">
+                <a href="#home" class="text-lavender hover:text-white text-sm">Privacy Policy</a>
+                <a href="#home" class="text-lavender hover:text-white text-sm">Terms of Service</a>
+            </div>
         </div>
     </footer>
 
     <script>
-        // Dark mode functionality
-        const themeToggle = document.getElementById('theme-toggle');
-        const themeToggleMobile = document.getElementById('theme-toggle-mobile');
-        const lightIcon = document.getElementById('theme-toggle-light-icon');
-        const darkIcon = document.getElementById('theme-toggle-dark-icon');
-        const lightIconMobile = document.getElementById('theme-toggle-light-icon-mobile');
-        const darkIconMobile = document.getElementById('theme-toggle-dark-icon-mobile');
-
-        // Check for saved theme preference or default to light mode
-        const currentTheme = localStorage.getItem('theme') || 'light';
-        if (currentTheme === 'dark') {
-            document.documentElement.classList.add('dark');
-            lightIcon.classList.add('hidden');
-            darkIcon.classList.remove('hidden');
-            lightIconMobile.classList.add('hidden');
-            darkIconMobile.classList.remove('hidden');
-        }
-
-        function toggleTheme() {
-            document.documentElement.classList.toggle('dark');
-            
-            // Toggle icons for both desktop and mobile
-            lightIcon.classList.toggle('hidden');
-            darkIcon.classList.toggle('hidden');
-            lightIconMobile.classList.toggle('hidden');
-            darkIconMobile.classList.toggle('hidden');
-            
-            // Save theme preference
-            const isDark = document.documentElement.classList.contains('dark');
-            localStorage.setItem('theme', isDark ? 'dark' : 'light');
-        }
-
-        themeToggle.addEventListener('click', toggleTheme);
-        themeToggleMobile.addEventListener('click', toggleTheme);
-
-        // Typewriter effect
-        const texts = ['Laravel Developer', 'Full Stack Engineer', 'API Specialist', 'Payment Integration Expert'];
-        let textIndex = 0;
-        let charIndex = 0;
-        const typewriterElement = document.getElementById('typewriter');
-
-        function typeWriter() {
-            if (charIndex < texts[textIndex].length) {
-                typewriterElement.textContent += texts[textIndex].charAt(charIndex);
-                charIndex++;
-                setTimeout(typeWriter, 100);
-            } else {
-                setTimeout(eraseText, 2000);
-            }
-        }
-
-        function eraseText() {
-            if (charIndex > 0) {
-                typewriterElement.textContent = texts[textIndex].substring(0, charIndex - 1);
-                charIndex--;
-                setTimeout(eraseText, 50);
-            } else {
-                textIndex = (textIndex + 1) % texts.length;
-                setTimeout(typeWriter, 500);
-            }
-        }
-
-        // Start typewriter effect
-        typeWriter();
-
-        // Mobile menu toggle
-        const mobileMenuButton = document.getElementById('mobile-menu-button');
-        const mobileMenu = document.getElementById('mobile-menu');
-        const mobileMenuIcon = mobileMenuButton.querySelector('i');
-
-        mobileMenuButton.addEventListener('click', () => {
-            mobileMenu.classList.toggle('active');
-
-            // Toggle hamburger/close icon
-            if (mobileMenu.classList.contains('active')) {
-                mobileMenuIcon.classList.remove('fa-bars');
-                mobileMenuIcon.classList.add('fa-times');
-            } else {
-                mobileMenuIcon.classList.remove('fa-times');
-                mobileMenuIcon.classList.add('fa-bars');
-            }
+        // Hero Mouse tracking for premium buttons
+        document.querySelectorAll('.btn-premium').forEach(btn => {
+            btn.onmousemove = e => {
+                const rect = btn.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                btn.style.setProperty('--x', x + 'px');
+                btn.style.setProperty('--y', y + 'px');
+            };
         });
 
-        // Close mobile menu when clicking on a link
-        const mobileMenuLinks = mobileMenu.querySelectorAll('a');
-        mobileMenuLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.remove('active');
-                mobileMenuIcon.classList.remove('fa-times');
-                mobileMenuIcon.classList.add('fa-bars');
+        // n8n Card Glow Tracking
+        document.querySelectorAll('.card-glow').forEach(card => {
+            card.addEventListener('mousemove', e => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                card.style.setProperty('--mouse-x', x + 'px');
+                card.style.setProperty('--mouse-y', y + 'px');
             });
         });
 
-        // Close mobile menu when clicking outside
-        document.addEventListener('click', (e) => {
-            if (!mobileMenuButton.contains(e.target) && !mobileMenu.contains(e.target)) {
-                mobileMenu.classList.remove('active');
-                mobileMenuIcon.classList.remove('fa-times');
-                mobileMenuIcon.classList.add('fa-bars');
-            }
+        // Mobile Menu Toggle
+        const btn = document.getElementById('mobile-menu-button');
+        const menu = document.getElementById('mobile-menu');
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
         });
 
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
+        // Close menu on link click
+        menu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => menu.classList.add('hidden'));
         });
 
-        // Intersection Observer for animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
+        // Scroll Reveal Animation (Simple)
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
+                    entry.target.classList.add('opacity-100', 'translate-y-0');
+                    entry.target.classList.remove('opacity-0', 'translate-y-10');
                 }
             });
-        }, observerOptions);
+        }, { threshold: 0.1 });
 
-        // Observe all animated elements
-        document.querySelectorAll('.fade-in-up').forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(30px)';
-            el.style.transition = 'all 0.8s ease-out';
-            observer.observe(el);
-        });
-
-        // Tech logos mouse tracking
-        const heroContainer = document.querySelector('.hero-container');
-        const techLogos = document.querySelectorAll('.tech-logo');
-        let mouseX = 0;
-        let mouseY = 0;
-        let isMouseInHero = false;
-
-        // Dynamic logo positions based on screen size
-        function getLogoPositions() {
-            const width = window.innerWidth;
-            const height = window.innerHeight;
-
-            return [
-                { x: width * 0.1, y: height * 0.2 },
-                { x: width * 0.3, y: height * 0.15 },
-                { x: width * 0.5, y: height * 0.25 },
-                { x: width * 0.7, y: height * 0.18 },
-                { x: width * 0.2, y: height * 0.4 },
-                { x: width * 0.6, y: height * 0.45 },
-                { x: width * 0.8, y: height * 0.35 },
-                { x: width * 0.4, y: height * 0.5 }
-            ];
-        }
-
-        let logoPositions = getLogoPositions();
-
-        // Update positions on window resize
-        window.addEventListener('resize', () => {
-            logoPositions = getLogoPositions();
-        });
-
-        heroContainer.addEventListener('mouseenter', () => {
-            isMouseInHero = true;
-        });
-
-        heroContainer.addEventListener('mouseleave', () => {
-            isMouseInHero = false;
-            techLogos.forEach(logo => {
-                logo.classList.remove('visible');
-            });
-        });
-
-        heroContainer.addEventListener('mousemove', (e) => {
-            if (!isMouseInHero) return;
-
-            const rect = heroContainer.getBoundingClientRect();
-            mouseX = e.clientX - rect.left;
-            mouseY = e.clientY - rect.top;
-
-            techLogos.forEach((logo, index) => {
-                const logoPos = logoPositions[index];
-                const distance = Math.sqrt(
-                    Math.pow(mouseX - logoPos.x, 2) + Math.pow(mouseY - logoPos.y, 2)
-                );
-
-                const radius = window.innerWidth > 768 ? 200 : 150; // Larger radius on desktop
-
-                if (distance < radius) { // Show logos within radius
-                    logo.classList.add('visible');
-
-                    // Calculate position relative to mouse with some offset
-                    const angle = Math.atan2(logoPos.y - mouseY, logoPos.x - mouseX);
-                    const offsetDistance = 60 + (index * 8); // Varying distances
-                    const logoX = mouseX + Math.cos(angle) * offsetDistance;
-                    const logoY = mouseY + Math.sin(angle) * offsetDistance;
-
-                    // Ensure logos stay within bounds
-                    const boundedX = Math.max(20, Math.min(logoX, rect.width - 60));
-                    const boundedY = Math.max(20, Math.min(logoY, rect.height - 60));
-
-                    logo.style.left = boundedX + 'px';
-                    logo.style.top = boundedY + 'px';
-                } else {
-                    logo.classList.remove('visible');
-                }
-            });
+        document.querySelectorAll('section').forEach(section => {
+            section.classList.add('transition-all', 'duration-1000', 'opacity-0', 'translate-y-10');
+            observer.observe(section);
         });
     </script>
 </body>
