@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redis + Horizon · Laravel Tips</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { ink: '#0f1115', panel: '#181a1b', card: '#23272e', sky: '#38bdf8', teal: '#38b2ac' },
+                    fontFamily: { sans: ['Segoe UI', 'Helvetica Neue', 'Arial', 'sans-serif'] },
+                },
+            },
+        }
+    </script>
+    <link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    <style>
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: #181a1b; }
+        ::-webkit-scrollbar-thumb { background: #2d3748; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #4a5568; }
+        ::selection { color: #fff; background: rgb(34 197 94); }
+        pre[class*="language-"] { background: #23272e !important; border: 1px solid #2d3748; border-radius: 0.5rem; margin: 0; }
+        :not(pre) > code[class*="language-"] { background: #23272e; }
+    </style>
+</head>
+
+<body class="bg-ink text-slate-200 font-sans antialiased min-h-screen">
+    <div class="mx-auto max-w-7xl px-4 lg:px-8 py-6">
+        <div class="flex flex-col lg:flex-row gap-6">
+
+            <!-- Sidebar -->
+            <aside class="lg:w-72 lg:flex-shrink-0">
+                <div class="lg:sticky lg:top-6 bg-panel rounded-xl border border-slate-800 p-5">
+                    <a href="index.html" class="flex items-center gap-2.5 mb-5">
+                        <span class="grid place-items-center h-9 w-9 rounded-lg bg-rose-500/10 text-rose-400 font-bold text-lg">L</span>
+                        <div>
+                            <h1 class="text-base font-semibold text-slate-100 leading-tight">Laravel Tips</h1>
+                            <p class="text-xs text-slate-500">cheatsheet &amp; notes</p>
+                        </div>
+                    </a>
+                    <p class="text-xs font-semibold uppercase tracking-wider text-slate-500 mb-2">Topics</p>
+                    <nav class="flex flex-col gap-1">
+                        <a href="subqueries.html" class="flex items-center gap-2 rounded-lg px-3 py-2 text-sm text-slate-300 hover:bg-card hover:text-white transition">
+                            <span class="text-sky">›</span> Subquery Columns
+                        </a>
+                        <a href="dynamic-relationships.html" class="flex items-center gap-2 rounded-lg px-3 py-2 text-sm text-slate-300 hover:bg-card hover:text-white transition">
+                            <span class="text-sky">›</span> Dynamic Relationships
+                        </a>
+                        <a href="redis-horizon.html" class="flex items-center gap-2 rounded-lg px-3 py-2 text-sm bg-card text-white transition">
+                            <span class="text-sky">›</span> Redis + Horizon
+                        </a>
+                    </nav>
+
+                    <!-- on-page section nav -->
+                    <p class="text-xs font-semibold uppercase tracking-wider text-slate-500 mt-6 mb-2">On this page</p>
+                    <nav class="flex flex-col gap-0.5 text-sm">
+                        <a href="#install" class="text-slate-400 hover:text-sky px-3 py-1">1. Installation</a>
+                        <a href="#commands" class="text-slate-400 hover:text-sky px-3 py-1">2. Horizon commands</a>
+                        <a href="#supervisor" class="text-slate-400 hover:text-sky px-3 py-1">3. Supervisor</a>
+                        <a href="#queue" class="text-slate-400 hover:text-sky px-3 py-1">4. Queue commands</a>
+                        <a href="#clear" class="text-slate-400 hover:text-sky px-3 py-1">5. Clearing a queue</a>
+                        <a href="#running" class="text-slate-400 hover:text-sky px-3 py-1">6. Finding running jobs</a>
+                        <a href="#name" class="text-slate-400 hover:text-sky px-3 py-1">7. Finding the queue name</a>
+                        <a href="#prefix" class="text-slate-400 hover:text-sky px-3 py-1">8. The key prefix</a>
+                    </nav>
+                </div>
+            </aside>
+
+            <!-- Content -->
+            <main class="flex-1 min-w-0">
+                <section>
+                    <header class="mb-6">
+                        <span class="inline-block text-xs font-medium px-2.5 py-1 rounded-full bg-rose-500/10 text-rose-400 mb-3">Queues · Redis · Horizon</span>
+                        <h1 class="text-2xl lg:text-3xl font-bold text-slate-100">Laravel Redis, Queues &amp; Horizon</h1>
+                        <p class="mt-2 text-slate-400">Running Horizon under Supervisor, inspecting running jobs, clearing queues, and finding queue names.</p>
+                    </header>
+
+                    <div class="space-y-6">
+
+                        <div class="bg-teal/10 border-l-4 border-teal rounded-r-lg p-4">
+                            <strong class="text-teal block mb-1">What is Horizon?</strong>
+                            <p class="text-slate-300 text-sm">Laravel Horizon is a dashboard and code-driven configuration layer for your <strong>Redis-backed queues</strong>. It gives you real-time metrics (throughput, runtime, failures), retry tooling, and queue-worker auto-balancing — all configured in <code class="bg-card text-sky px-1.5 py-0.5 rounded text-xs">config/horizon.php</code>. It only works with the <code class="bg-card text-sky px-1.5 py-0.5 rounded text-xs">redis</code> queue driver.</p>
+                        </div>
+
+                        <h2 id="install" class="text-xl font-semibold text-sky scroll-mt-6">1. Installation &amp; Setup</h2>
+                        <pre><code class="language-bash"># require the package
+composer require laravel/horizon
+
+# publish config + assets (creates config/horizon.php)
+php artisan horizon:install
+
+# make sure your queue connection is redis
+# .env
+QUEUE_CONNECTION=redis
+REDIS_HOST=127.0.0.1
+REDIS_PORT=6379</code></pre>
+                        <p class="text-slate-400 text-sm">Dashboard is served at <code class="bg-card text-sky px-1.5 py-0.5 rounded text-xs">/horizon</code>. Lock it down in <code class="bg-card text-sky px-1.5 py-0.5 rounded text-xs">app/Providers/HorizonServiceProvider.php</code> via the <code class="bg-card text-sky px-1.5 py-0.5 rounded text-xs">gate()</code> method.</p>
+
+                        <h2 id="commands" class="text-xl font-semibold text-sky pt-2 scroll-mt-6">2. Horizon Artisan Commands</h2>
+                        <pre><code class="language-bash"># start the Horizon master process (spawns all workers)
+php artisan horizon
+
+# check supervisor/worker status: running | paused | inactive
+php artisan horizon:status
+
+# pause / resume job processing
+php artisan horizon:pause
+php artisan horizon:continue
+
+# gracefully terminate — finishes the current jobs, then exits.
+# Run this on every deploy so Supervisor restarts a fresh process
+# with your new code.
+php artisan horizon:terminate
+
+# clear all jobs from a queue (default queue if omitted)
+php artisan horizon:clear
+php artisan horizon:clear --queue=emails
+
+# delete a single failed job from the dashboard
+php artisan horizon:forget {id}
+
+# store a metrics snapshot (schedule this every 5 min)
+php artisan horizon:snapshot</code></pre>
+                        <div class="bg-card/60 border border-slate-700 rounded-lg p-4 text-sm">
+                            <p class="text-slate-400">Schedule the snapshot in <code class="bg-card text-sky px-1.5 py-0.5 rounded text-xs">routes/console.php</code> (or the Kernel):</p>
+                            <pre class="mt-2"><code class="language-php">Schedule::command('horizon:snapshot')->everyFiveMinutes();</code></pre>
+                        </div>
+
+                        <h2 id="supervisor" class="text-xl font-semibold text-sky pt-2 scroll-mt-6">3. Keeping Horizon Alive with Supervisor</h2>
+                        <p class="text-slate-400 text-sm">The <code class="bg-card text-sky px-1.5 py-0.5 rounded text-xs">php artisan horizon</code> process must always be running. Supervisor restarts it automatically if it crashes or after a deploy. Create <code class="bg-card text-sky px-1.5 py-0.5 rounded text-xs">/etc/supervisor/conf.d/horizon.conf</code>:</p>
+                        <pre><code class="language-bash">[program:horizon]
+process_name=%(program_name)s
+command=php /var/www/your-app/artisan horizon
+directory=/var/www/your-app
+autostart=true
+autorestart=true
+user=www-data
+redirect_stderr=true
+stdout_logfile=/var/www/your-app/storage/logs/horizon.log
+stopwaitsecs=3600</code></pre>
+                        <p class="text-slate-400 text-sm"><strong class="text-rose-400">Important:</strong> <code class="bg-card text-sky px-1.5 py-0.5 rounded text-xs">stopwaitsecs</code> must be longer than your longest-running job so Supervisor doesn't kill a job mid-flight.</p>
+
+                        <p class="text-slate-300 text-sm pt-2">Then load and manage the program:</p>
+                        <pre><code class="language-bash"># re-read config files for new/changed programs
+sudo supervisorctl reread
+
+# apply the changes (start newly added programs)
+sudo supervisorctl update
+
+# manual control
+sudo supervisorctl start horizon
+sudo supervisorctl stop horizon
+sudo supervisorctl restart horizon
+
+# check status of everything Supervisor manages
+sudo supervisorctl status
+
+# wildcard restart (useful when process_name is numbered)
+sudo supervisorctl restart horizon:*</code></pre>
+
+                        <h2 id="queue" class="text-xl font-semibold text-sky pt-2 scroll-mt-6">4. General Queue Commands</h2>
+                        <p class="text-slate-400 text-sm">These work with any queue driver. With Horizon you normally let it manage workers, but these are essential for debugging:</p>
+                        <pre><code class="language-bash"># process jobs (Horizon does this for you under the hood)
+php artisan queue:work redis --queue=high,default
+
+# tell all workers to restart after the current job (deploys)
+php artisan queue:restart
+
+# list failed jobs
+php artisan queue:failed
+
+# retry failed jobs
+php artisan queue:retry all
+php artisan queue:retry {uuid}
+
+# delete failed jobs
+php artisan queue:forget {uuid}   # one
+php artisan queue:flush           # all
+
+# alert when a queue backs up beyond a threshold
+php artisan queue:monitor redis:default,redis:emails --max=100</code></pre>
+
+                        <h2 id="clear" class="text-xl font-semibold text-sky pt-2 scroll-mt-6">5. How to Clear a Queue</h2>
+                        <pre><code class="language-bash"># clear PENDING jobs from a queue (Artisan)
+php artisan queue:clear redis --queue=default
+php artisan queue:clear redis --queue=emails
+
+# or via Horizon
+php artisan horizon:clear --queue=default
+
+# nuke directly in Redis (last resort)
+redis-cli DEL queues:default
+redis-cli DEL queues:default:delayed
+redis-cli DEL queues:default:reserved</code></pre>
+                        <div class="bg-rose-500/10 border-l-4 border-rose-500 rounded-r-lg p-4">
+                            <strong class="text-rose-400 block mb-1">⚠️ Heads up</strong>
+                            <p class="text-slate-300 text-sm"><code class="bg-card text-sky px-1.5 py-0.5 rounded text-xs">queue:clear</code> removes <em>pending</em> jobs but not jobs already reserved by a running worker. <code class="bg-card text-sky px-1.5 py-0.5 rounded text-xs">queue:flush</code> only clears the <em>failed</em> jobs table. Deleting Redis keys directly is irreversible.</p>
+                        </div>
+
+                        <h2 id="running" class="text-xl font-semibold text-sky pt-2 scroll-mt-6">6. How to Find Running / Pending Jobs in Redis</h2>
+                        <p class="text-slate-400 text-sm">Jobs live in Redis under keys named <code class="bg-card text-sky px-1.5 py-0.5 rounded text-xs">queues:{name}</code>. Inspect them with <code class="bg-card text-sky px-1.5 py-0.5 rounded text-xs">redis-cli</code>:</p>
+                        <pre><code class="language-bash">redis-cli
+
+# list every queue key that exists
+KEYS queues:*
+
+# PENDING jobs (a Redis LIST) — count and contents
+LLEN  queues:default            # how many are waiting
+LRANGE queues:default 0 -1      # show the raw job payloads
+
+# RESERVED jobs = currently being processed (a sorted set)
+ZCARD  queues:default:reserved          # how many are running
+ZRANGE queues:default:reserved 0 -1     # show them
+
+# DELAYED jobs = scheduled for the future (a sorted set)
+ZCARD  queues:default:delayed
+ZRANGE queues:default:delayed 0 -1 WITHSCORES   # score = run-at timestamp</code></pre>
+                        <div class="bg-card/60 border border-slate-700 rounded-lg p-4 text-sm space-y-1">
+                            <p class="text-slate-300 font-medium">Quick mental model of the three states:</p>
+                            <ul class="list-disc list-inside text-slate-400 space-y-0.5 marker:text-slate-600">
+                                <li><strong class="text-slate-300">Pending</strong> → <code class="bg-card text-sky px-1.5 py-0.5 rounded text-xs">queues:default</code> (LIST) — waiting to be picked up.</li>
+                                <li><strong class="text-slate-300">Reserved</strong> → <code class="bg-card text-sky px-1.5 py-0.5 rounded text-xs">queues:default:reserved</code> (ZSET) — a worker is running it now.</li>
+                                <li><strong class="text-slate-300">Delayed</strong> → <code class="bg-card text-sky px-1.5 py-0.5 rounded text-xs">queues:default:delayed</code> (ZSET) — released/retried, due later.</li>
+                            </ul>
+                            <p class="text-slate-400 pt-1">For a friendlier view, the <code class="bg-card text-sky px-1.5 py-0.5 rounded text-xs">/horizon</code> dashboard shows pending, running, completed and failed jobs in real time.</p>
+                        </div>
+
+                        <h2 id="name" class="text-xl font-semibold text-sky pt-2 scroll-mt-6">7. How to Find the Queue Name</h2>
+                        <p class="text-slate-400 text-sm">A job's queue name comes from one of these (in order of precedence):</p>
+                        <pre><code class="language-php">// 1. Set explicitly when dispatching
+ProcessPodcast::dispatch($podcast)->onQueue('emails');
+
+// 2. Set on the job class itself
+class ProcessPodcast implements ShouldQueue
+{
+    public $queue = 'emails';
+    // or in the constructor:
+    public function __construct() {
+        $this->onQueue('emails');
+    }
+}</code></pre>
+                        <p class="text-slate-400 text-sm">The default name (when none is set) is defined in <code class="bg-card text-sky px-1.5 py-0.5 rounded text-xs">config/queue.php</code>:</p>
+                        <pre><code class="language-php">'redis' => [
+    'driver' => 'redis',
+    'connection' => 'default',
+    'queue' => env('REDIS_QUEUE', 'default'),  // &lt;-- default queue name
+    'retry_after' => 90,
+    'block_for' => null,
+],</code></pre>
+                        <p class="text-slate-400 text-sm">To discover which queue names actually exist at runtime, list the Redis keys:</p>
+                        <pre><code class="language-bash"># every queue name currently in use shows up here
+redis-cli KEYS 'queues:*'
+
+# example output:
+#   queues:default
+#   queues:emails
+#   queues:emails:reserved
+#   queues:notifications:delayed</code></pre>
+                        <p class="text-slate-400 text-sm">The queues Horizon supervises are also listed under each supervisor's <code class="bg-card text-sky px-1.5 py-0.5 rounded text-xs">queue</code> key in <code class="bg-card text-sky px-1.5 py-0.5 rounded text-xs">config/horizon.php</code>.</p>
+
+                        <h2 id="prefix" class="text-xl font-semibold text-sky pt-2 scroll-mt-6">8. Finding the Correct Redis Key (the Prefix)</h2>
+                        <div class="bg-rose-500/10 border-l-4 border-rose-500 rounded-r-lg p-4">
+                            <strong class="text-rose-400 block mb-1">Why <code class="bg-card text-rose-300 px-1.5 py-0.5 rounded text-xs">KEYS queues:*</code> returns nothing</strong>
+                            <p class="text-slate-300 text-sm">Laravel prepends a <strong>prefix</strong> to every Redis key. So a queue stored as <code class="bg-card text-sky px-1.5 py-0.5 rounded text-xs">queues:default</code> in your code actually lives at <code class="bg-card text-sky px-1.5 py-0.5 rounded text-xs">laravel_database_queues:default</code> in Redis. If you query the bare name you'll find nothing — you have to include the prefix.</p>
+                        </div>
+
+                        <p class="text-slate-400 text-sm">Find the exact prefix your app uses with Tinker:</p>
+                        <pre><code class="language-bash">php artisan tinker</code></pre>
+                        <pre><code class="language-php">// the prefix Laravel adds to every Redis key
+config('database.redis.options.prefix');
+// => "laravel_database_"
+
+// build the real key for a queue
+config('database.redis.options.prefix') . 'queues:default';
+// => "laravel_database_queues:default"</code></pre>
+
+                        <p class="text-slate-400 text-sm">The prefix is defined in <code class="bg-card text-sky px-1.5 py-0.5 rounded text-xs">config/database.php</code> and defaults to your app name + <code class="bg-card text-sky px-1.5 py-0.5 rounded text-xs">_database_</code>:</p>
+                        <pre><code class="language-php">'redis' => [
+    'options' => [
+        'prefix' => env('REDIS_PREFIX', Str::slug(
+            env('APP_NAME', 'laravel'), '_'
+        ) . '_database_'),
+    ],
+    // ...
+],</code></pre>
+
+                        <p class="text-slate-400 text-sm">Now you can query the real keys in <code class="bg-card text-sky px-1.5 py-0.5 rounded text-xs">redis-cli</code>:</p>
+                        <pre><code class="language-bash">redis-cli
+
+# include the prefix when listing / inspecting keys
+KEYS laravel_database_queues:*
+LLEN laravel_database_queues:default
+ZRANGE laravel_database_queues:default:reserved 0 -1
+
+# don't know the prefix? match everything that ends in queues:*
+KEYS *queues:*</code></pre>
+
+                        <div class="bg-card/60 border border-slate-700 rounded-lg p-4 text-sm space-y-1">
+                            <p class="text-slate-300 font-medium">Good to know</p>
+                            <ul class="list-disc list-inside text-slate-400 space-y-0.5 marker:text-slate-600">
+                                <li>Artisan commands (<code class="bg-card text-sky px-1.5 py-0.5 rounded text-xs">queue:clear</code>, Horizon, etc.) add the prefix for you — you only deal with it when hitting Redis directly.</li>
+                                <li>Horizon may use its own connection/prefix; check <code class="bg-card text-sky px-1.5 py-0.5 rounded text-xs">config('horizon.prefix')</code> (defaults to <code class="bg-card text-sky px-1.5 py-0.5 rounded text-xs">horizon:</code>) for Horizon's own keys.</li>
+                                <li>Set <code class="bg-card text-sky px-1.5 py-0.5 rounded text-xs">REDIS_PREFIX</code> in <code class="bg-card text-sky px-1.5 py-0.5 rounded text-xs">.env</code> to override it.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <nav class="mt-10 flex justify-between border-t border-slate-800 pt-5 text-sm">
+                        <a href="dynamic-relationships.html" class="text-sky hover:underline">← Dynamic Relationships</a>
+                        <span></span>
+                    </nav>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-php.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-markup-templating.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-bash.min.js"></script>
+</body>
+
+</html>

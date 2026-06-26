@@ -1,294 +1,78 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tips - Dynamic Relationships in Laravel</title>
-    <link rel="stylesheet" href="../styles.css">
-    <!-- Prism.js for code highlighting -->
-    <link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    <title>Laravel Tips &amp; Cheatsheet</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { ink: '#0f1115', panel: '#181a1b', card: '#23272e', sky: '#38bdf8', teal: '#38b2ac' },
+                    fontFamily: { sans: ['Segoe UI', 'Helvetica Neue', 'Arial', 'sans-serif'] },
+                },
+            },
+        }
+    </script>
     <style>
-        body {
-            max-width: 1200px;
-            margin: 2rem auto;
-            padding: 1rem;
-            background: #181a1b;
-            color: #e2e8f0;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
-            font-family: 'Segoe UI', 'Helvetica Neue', Arial, 'Liberation Sans', sans-serif;
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-        }
-
-        @media (min-width: 768px) {
-            body {
-                flex-direction: row;
-                padding: 2rem;
-            }
-        }
-
-        h1,
-        h2 {
-            color: #38bdf8;
-        }
-
-        pre {
-            background: #23272e;
-            padding: 0.8em;
-            border-radius: 5px;
-            overflow-x: auto;
-            font-size: 0.875rem;
-        }
-
-        @media (min-width: 768px) {
-            pre {
-                padding: 1em;
-                font-size: 1rem;
-            }
-        }
-
-        code {
-            color: #38bdf8;
-            background: #23272e;
-            padding: 2px 4px;
-            border-radius: 3px;
-            font-size: 0.875rem;
-        }
-
-        .note {
-            background: #24343d;
-            border-left: 4px solid #38b2ac;
-            padding: 1em;
-            margin: 1em 0;
-            border-radius: 4px;
-            color: #e2e8f0;
-        }
-
-        a {
-            color: #63b3ed;
-        }
-
-        .sidebar {
-            width: 100%;
-            background: #23272e;
-            border-radius: 8px;
-            padding: 1rem;
-            height: fit-content;
-            position: static;
-        }
-
-        @media (min-width: 768px) {
-            .sidebar {
-                width: 220px;
-                min-width: 180px;
-                max-width: 240px;
-                padding: 1.5rem 1rem;
-                position: sticky;
-                top: 2rem;
-                align-self: flex-start;
-            }
-        }
-
-        .sidebar h3 {
-            color: #38bdf8;
-            font-size: 1rem;
-            margin-bottom: 0.8rem;
-            letter-spacing: 0.03em;
-        }
-
-        @media (min-width: 768px) {
-            .sidebar h3 {
-                font-size: 1.1rem;
-                margin-bottom: 1rem;
-            }
-        }
-
-        .sidebar ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
-
-        @media (min-width: 768px) {
-            .sidebar ul {
-                display: block;
-            }
-        }
-
-        .sidebar li {
-            margin-bottom: 0;
-        }
-
-        @media (min-width: 768px) {
-            .sidebar li {
-                margin-bottom: 0.7rem;
-            }
-        }
-
-        .sidebar a {
-            color: #e2e8f0;
-            text-decoration: none;
-            font-size: 0.9rem;
-            transition: color 0.2s;
-            padding: 0.5rem;
-            border-radius: 4px;
-            display: block;
-        }
-
-        @media (min-width: 768px) {
-            .sidebar a {
-                font-size: 1rem;
-                padding: 0;
-            }
-        }
-
-        .content {
-            flex: 1 1 0%;
-            min-width: 0;
-        }
-
-        h1 {
-            font-size: 1.5rem;
-            line-height: 1.3;
-        }
-
-        @media (min-width: 768px) {
-            h1 {
-                font-size: 2rem;
-            }
-        }
-
-        h2 {
-            font-size: 1.25rem;
-            line-height: 1.3;
-        }
-
-        @media (min-width: 768px) {
-            h2 {
-                font-size: 1.5rem;
-            }
-        }
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: #181a1b; }
+        ::-webkit-scrollbar-thumb { background: #2d3748; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #4a5568; }
+        ::selection { color: #fff; background: rgb(34 197 94); }
     </style>
 </head>
 
-<body>
-    <nav class="sidebar">
-        <h3>Topics</h3>
-        <ul>
-            <li><a href="#computed-column-last-login-at">Using Subqueries to get column</a></li>
-            <li><a href="#dynamic-relationships">Dynamic Relationships in Laravel</a></li>
-        </ul>
-    </nav>
-    <main class="content">
-        <h1 id="computed-column-last-login-at">Using Subqueries to Get the Last Login Date</h1>
-        <p>
-            You can add a computed column <code>last_login_at</code> to each user using a subquery:
-        </p>
-        <pre><code class="language-php">$users = User::query()
-                ->addSelect(['last_login_at' => Login::select('created_at')
-                ->whereColumn('user_id', 'users.id')
-                ->orderByDesc('created_at')
-                ->limit(1)
-                ])
-                ->get();</code></pre>
-        <p>
-            This adds a computed column <code>last_login_at</code> to each user.
-        </p>
-        <p>
-            Update the Blade view to display this new attribute:
-        </p>
-        <pre><code class="language-blade">{{ $user->last_login_at }}</code></pre>
-        <p>
-            Note that we no longer have the <code>diffForHumans</code> formatting because this is now a string, not a
-            Carbon instance.
-        </p>
-        <h2>Fixing Date Formatting with Query-Time Casting</h2>
-        <p>
-            Back in the Blade view, adding <code>diffForHumans()</code> to <code>last_login_at</code> causes an error
-            because it's a string, not a Carbon instance.
-        </p>
-        <p>
-            Previously, this worked because the login model cast the <code>created_at</code> attribute to Carbon
-            automatically.
-        </p>
-        <p>
-            Now that we're getting the date directly in the users query, this casting doesn't happen.
-        </p>
-        <p>
-            Laravel provides an elegant solution called <strong>query-time casting</strong>.
-        </p>
-        <p>
-            Update the query to add a cast:
-        </p>
-        <pre><code class="language-php">$users = User::query()
-                ->addSelect(['last_login_at' => Login::select('created_at')
-                ->whereColumn('user_id', 'users.id')
-                ->orderByDesc('created_at')
-                ->limit(1)
-                ])
-                ->withCasts(['last_login_at' => 'datetime'])
-                ->get();</code></pre>
-        <p>
-            Now, in the Blade view, <code>diffForHumans()</code> works again:
-        </p>
-        <pre><code class="language-blade">{{ $user->last_login_at->diffForHumans() }}</code></pre>
+<body class="bg-ink text-slate-200 font-sans antialiased min-h-screen">
+    <div class="mx-auto max-w-5xl px-4 lg:px-8 py-12 lg:py-16">
 
-        <h1 id="dynamic-relationships">Dynamic Relationships in Laravel</h1>
-        <p>We can achieve this using <strong>dynamic relationships</strong>.</p>
+        <!-- Hero -->
+        <header class="mb-12">
+            <div class="flex items-center gap-3 mb-5">
+                <span class="grid place-items-center h-12 w-12 rounded-xl bg-rose-500/10 text-rose-400 font-bold text-2xl">L</span>
+                <div>
+                    <h1 class="text-2xl lg:text-3xl font-bold text-slate-100">Laravel Tips &amp; Cheatsheet</h1>
+                    <p class="text-slate-500 text-sm">A growing collection of notes, patterns and commands.</p>
+                </div>
+            </div>
+            <p class="text-slate-400 max-w-2xl">Pick a topic below. Each one is a self-contained page you can bookmark and share.</p>
+        </header>
 
-        <h2>Step 1: Update the <code>User</code> Model</h2>
-        <ol>
-            <li>Remove the two last login scopes in the <code>User</code> model.</li>
-            <li>Add a new <code>lastLogin</code> <code>belongsTo</code> relationship:</li>
-        </ol>
-        <pre><code class="language-php">public function lastLogin()
-                {
-                return $this->belongsTo(Login::class, 'last_login_id');
-                }</code></pre>
-        <p>Normally, for a <code>belongsTo</code> relationship to work, the <code>users</code> table needs a foreign key
-            column—in this case, <code>last_login_id</code>. Since our <code>users</code> table does not have this
-            column, we'll use a subquery to select it instead.</p>
+        <!-- Topic cards -->
+        <div class="grid gap-5 sm:grid-cols-2">
 
-        <h2>Step 2: Create a <code>withLastLogin</code> Scope</h2>
-        <pre><code class="language-php">public function scopeWithLastLogin($query)
-                {
-                $query->addSelect(['last_login_id' => Login::select('id')
-                ->whereColumn('user_id', 'users.id')
-                ->orderByDesc('created_at')
-                ->limit(1)
-                ])->with('lastLogin');
-                }</code></pre>
-        <p>This adds a computed <code>last_login_id</code> column and eager loads the <code>lastLogin</code>
-            relationship automatically. Eloquent treats this computed column as if it were a real column, so everything
-            works seamlessly.</p>
+            <a href="subqueries.html"
+               class="group block bg-panel border border-slate-800 rounded-xl p-6 hover:border-sky/50 hover:bg-card transition">
+                <span class="inline-block text-xs font-medium px-2.5 py-1 rounded-full bg-sky/10 text-sky mb-3">Eloquent</span>
+                <h2 class="text-lg font-semibold text-slate-100 group-hover:text-sky transition">Subquery Columns</h2>
+                <p class="mt-1.5 text-sm text-slate-400">Add computed columns like <code class="text-sky">last_login_at</code> with subqueries and query-time casting.</p>
+                <span class="inline-block mt-4 text-sm text-sky">Read →</span>
+            </a>
 
-        <h2>Step 3: Update the Query in <code>UserController</code></h2>
-        <pre><code class="language-php">$users = User::withLastLogin()->paginate();</code></pre>
-        <p>In the Blade view, instead of using the <code>last_login_at</code> attribute, use the <code>lastLogin</code>
-            relationship to access properties:</p>
-        <pre><code class="language-blade">{{ $user->lastLogin->created_at->diffForHumans() }}
-                {{ $user->lastLogin->ip_address }}</code></pre>
-        <p>Refreshing the browser shows everything works as expected.</p>
+            <a href="dynamic-relationships.html"
+               class="group block bg-panel border border-slate-800 rounded-xl p-6 hover:border-sky/50 hover:bg-card transition">
+                <span class="inline-block text-xs font-medium px-2.5 py-1 rounded-full bg-sky/10 text-sky mb-3">Eloquent</span>
+                <h2 class="text-lg font-semibold text-slate-100 group-hover:text-sky transition">Dynamic Relationships</h2>
+                <p class="mt-1.5 text-sm text-slate-400">Eager-load a <code class="text-sky">belongsTo</code> relationship that has no real foreign key column.</p>
+                <span class="inline-block mt-4 text-sm text-sky">Read →</span>
+            </a>
 
-        <div class="note">
-            <strong>Important Note on Lazy Loading:</strong><br>
-            You cannot lazy load dynamic relationships because unless you explicitly call the <code>withLastLogin</code>
-            scope, the <code>last_login_id</code> won't be present on the model. This isn't usually an issue since
-            dynamic relationships are typically used to solve performance problems where lazy loading is not ideal.
+            <a href="redis-horizon.html"
+               class="group block bg-panel border border-slate-800 rounded-xl p-6 hover:border-rose-400/50 hover:bg-card transition sm:col-span-2">
+                <span class="inline-block text-xs font-medium px-2.5 py-1 rounded-full bg-rose-500/10 text-rose-400 mb-3">Queues · Redis · Horizon</span>
+                <h2 class="text-lg font-semibold text-slate-100 group-hover:text-rose-400 transition">Laravel Redis, Queues &amp; Horizon</h2>
+                <p class="mt-1.5 text-sm text-slate-400">Horizon commands, running it under Supervisor, finding running jobs, clearing queues, and discovering queue names via <code class="text-sky">redis-cli</code>.</p>
+                <span class="inline-block mt-4 text-sm text-rose-400">Read →</span>
+            </a>
         </div>
-    </main>
 
-    <!-- Prism.js script -->
-    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-php.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-markup-templating.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-blade.min.js"></script>
+        <footer class="mt-14 pt-6 border-t border-slate-800 text-sm text-slate-600">
+            <a href="../index.html" class="hover:text-slate-400 transition">← Back to portfolio</a>
+        </footer>
+    </div>
 </body>
 
 </html>
